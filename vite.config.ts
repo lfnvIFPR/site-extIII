@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({command}) => ({
   plugins: [
     {enforce: 'pre', ...mdx(
       {remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug]}
@@ -14,5 +14,5 @@ export default defineConfig({
     },
     react({ include: /\.(mdx|js|jsx|ts|tsx)$/ })
   ],
-  base: '/site-extIII/',
-})
+  base: command === 'build' ? '/site-extIII/' : '/',
+}))

@@ -1,0 +1,26 @@
+article {
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    gap: 2ch;
+
+    h2 {
+        margin-top: 4ch;
+        padding-bottom: 1ch;
+        border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+        margin-bottom: -1ch;
+    }
+
+    pre {
+        display: flex;
+        justify-content: center;
+
+        > code {
+            min-width: 768px;
+            padding: 1rem;
+        } 
+    }
+}

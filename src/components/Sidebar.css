@@ -1,0 +1,12 @@
+ul {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding-left: 0;
+
+    li {
+        text-decoration: none;
+        list-style: none;
+    }
+}

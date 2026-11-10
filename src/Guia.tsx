@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router';
 import { artigos } from './artigos';
 import './Guia.css'
+import Sidebar from './components/Sidebar';
+import Article from './components/Article';
 
 function Guia() {
 
@@ -9,11 +11,11 @@ function Guia() {
       <header>Header</header>
       <div className="ticks"></div>
       <div className="content">
-        <aside>Aside</aside>
+        <aside><Sidebar /></aside>
         <main>
           <Routes>
             <Route path="/" element={<Navigate to={`/${artigos[0].slug}`} replace />} />
-            <Route path="/:slug" element={""} />
+            <Route path="/:slug" element={<Article />} />
             <Route path="*" element={""} />
           </Routes>
         </main>

@@ -1,0 +1,48 @@
+header, footer {
+  height: 10svh;
+}
+
+.content {
+  display: flex;
+  min-height: 80svh;
+  
+  > * {
+    border: 1px solid var(--border);
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  aside {
+    flex: 2;
+  }
+
+  main {
+    flex: 5;
+  }
+
+
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}

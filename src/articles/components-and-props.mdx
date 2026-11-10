@@ -1,0 +1,78 @@
+export const meta = { title: 'Components and Props', order: 2};
+
+# Components and Props
+
+This article tests ordered lists, nested lists, blockquotes, and tables on top of the basics.
+
+## Function Components
+
+A component is a function that returns markup. Names must start with a capital letter so React can tell them apart from HTML tags.
+
+```jsx
+function Greeting() {
+  return <p>Hello there.</p>
+}
+```
+
+> Components let you split the UI into independent, reusable pieces and think about each piece in isolation.
+
+## Passing Props
+
+Props are the inputs to a component. They flow **down** from parent to child.
+
+```jsx
+function Greeting({ name }) {
+  return <p>Hello, {name}.</p>
+}
+
+export default function App() {
+  return (
+    <>
+      <Greeting name="Ada" />
+      <Greeting name="Grace" />
+    </>
+  )
+}
+```
+
+### Default Values
+
+Provide a fallback with default parameter syntax:
+
+```jsx
+function Greeting({ name = 'stranger' }) {
+  return <p>Hello, {name}.</p>
+}
+```
+
+### The `children` Prop
+
+Anything nested between a component's tags arrives as `children`:
+
+```jsx
+function Card({ children }) {
+  return <div className="card">{children}</div>
+}
+```
+
+## Rules for Props
+
+1. Props are **read-only**. Never modify them inside a component.
+2. Data flows in one direction: parent to child.
+3. To change something, the parent passes down a function.
+   - The child calls the function.
+   - The parent updates its own state.
+   - React re-renders with new props.
+
+## Common Prop Types
+
+| Type     | Example                | Notes                          |
+| -------- | ---------------------- | ------------------------------ |
+| String   | `name="Ada"`           | Quotes, no braces needed       |
+| Number   | `count={3}`            | Braces required                |
+| Boolean  | `disabled`             | Shorthand for `disabled={true}`|
+| Function | `onClick={handleClick}`| Passed as a reference          |
+
+## Summary
+
+Components are functions, props are their arguments, and `children` lets you compose them like HTML.

@@ -1,0 +1,83 @@
+export const meta = { title: 'State and Effects', order: 3};
+
+# State and Effects
+
+This article tests longer code blocks, a horizontal rule, task lists, strikethrough, and an image-free page with many headings, which is useful for checking the sidebar table of contents.
+
+## Remembering Values with useState
+
+A component forgets local variables between renders. `useState` gives it memory.
+
+```jsx
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Clicked {count} times
+    </button>
+  )
+}
+```
+
+### Updating Based on Previous State
+
+When the next value depends on the previous one, pass an updater function:
+
+```jsx
+setCount((prev) => prev + 1)
+```
+
+### State Is Isolated
+
+Each rendered copy of a component has its own state. Two `<Counter />` elements on the same page count independently.
+
+---
+
+## Running Side Effects with useEffect
+
+Effects run **after** rendering and are meant for things outside React, such as timers, subscriptions, or document titles.
+
+```jsx
+import { useEffect, useState } from 'react'
+
+export default function Clock() {
+  const [now, setNow] = useState(new Date())
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  return <p>{now.toLocaleTimeString()}</p>
+}
+```
+
+### The Dependency Array
+
+The second argument controls when the effect re-runs:
+
+- `[]` runs once, after the first render.
+- `[value]` runs when `value` changes.
+- Omitted runs after every render.
+
+### Cleanup
+
+The function you return runs before the effect re-runs and when the component unmounts. Always clean up timers and listeners.
+
+## Checklist
+
+- [x] Understand `useState`
+- [x] Understand the dependency array
+- [ ] Build a small project using both
+- [ ] ~~Memorize every hook~~ Learn them as you need them
+
+## Common Mistakes
+
+1. Mutating state directly instead of calling the setter.
+2. Forgetting the cleanup function.
+3. Leaving a value out of the dependency array.
+
+For more detail, see the [official reference](https://react.dev/reference/react).

@@ -1,0 +1,69 @@
+export const meta = { title: 'Getting Started', order: 1};
+
+# Getting Started
+
+Welcome to the guide. This article checks that basic Markdown renders correctly: headings, paragraphs, **bold**, *italic*, `inline code`, and [links](https://react.dev).
+
+## What is React?
+
+React is a JavaScript library for building user interfaces out of small, reusable pieces called **components**. You describe what the screen should look like for a given state, and React updates the DOM when that state changes.
+
+## Prerequisites
+
+Before starting, make sure you have:
+
+- Node.js 18 or newer
+- A package manager (`npm`, `pnpm`, or `yarn`)
+- Basic knowledge of JavaScript
+
+## Creating a Project
+
+Scaffold a new project with Vite:
+
+```bash
+npm create vite@latest my-app -- --template react
+cd my-app
+npm install
+npm run dev
+```
+
+The dev server prints a local address. Open it in your browser to see the starter page.
+
+## Project Structure
+
+A fresh project looks roughly like this:
+
+```
+my-app/
+  index.html
+  package.json
+  vite.config.js
+  src/
+    main.jsx
+    App.jsx
+```
+
+### The Entry Point
+
+`main.jsx` mounts your app into the page:
+
+```jsx
+import { createRoot } from 'react-dom/client'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(<App />)
+```
+
+### The Root Component
+
+`App.jsx` is where your own components begin:
+
+```jsx
+export default function App() {
+  return <h1>Hello, world!</h1>
+}
+```
+
+## Next Steps
+
+Continue to the article on **Components and Props** to learn how to split a UI into reusable parts.

@@ -8,10 +8,11 @@ import rehypeSlug from 'rehype-slug'
 // https://vite.dev/config/
 export default defineConfig(({command}) => ({
   plugins: [
-    {enforce: 'pre', ...mdx(
-      {remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug]}
-    )
-    },
+    {enforce: 'pre', ...mdx({
+      remarkPlugins: [remarkGfm], 
+      rehypePlugins: [rehypeSlug],
+      providerImportSource: '@mdx-js/react',
+    })},
     react({ include: /\.(mdx|js|jsx|ts|tsx)$/ })
   ],
   base: command === 'build' ? '/site-extIII/' : '/',

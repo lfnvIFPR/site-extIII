@@ -11,12 +11,16 @@ A component forgets local variables between renders. `useState` gives it memory.
 ```jsx
 import { useState } from 'react'
 
-export default function Counter() {
+export function Counter({ step, decrement = false }) {
   const [count, setCount] = useState(0)
 
+
+  const delta = decrement ? -step : step
+
   return (
-    <button onClick={() => setCount(count + 1)}>
-      Clicked {count} times
+    <button type="button" onClick={() => setCount((current) => current + delta)}>
+      Count: {count} ({delta > 0 ? '+' : ''}
+      {delta})
     </button>
   )
 }
@@ -29,6 +33,8 @@ When the next value depends on the previous one, pass an updater function:
 ```jsx
 setCount((prev) => prev + 1)
 ```
+
+<CounterDemo />
 
 ### State Is Isolated
 

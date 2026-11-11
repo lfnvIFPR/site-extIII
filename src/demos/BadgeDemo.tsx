@@ -5,6 +5,7 @@ export function BadgeDemo() {
   return (
     <Playground<BadgeProps>
       component={Badge}
+      name="Badge"
       initial={{
         label: 'New',
         size: 14,

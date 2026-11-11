@@ -23,7 +23,8 @@ type ControlFor<T> =
 type AnyControl = RangeControl | ToggleControl | TextControl | SelectControl<string>
 
 type PlaygroundProps<P extends object> = {
-  component: ComponentType<P>
+  component: ComponentType<P>,
+  name: string,
   initial: P
   controls: { [K in keyof P]?: ControlFor<NonNullable<P[K]>> }
 }
@@ -47,14 +48,14 @@ export function Playground<P extends object>({
   component: Component,
   initial,
   controls,
+  name
 }: PlaygroundProps<P>) {
   const uid = useId()
   const [values, setValues] = useState<P>(initial)
 
   // cast satânico
   const Example = Component as ComponentType<object>
-  const name = Component.displayName ?? Component.name ?? 'Component'
-
+  
   // cast pois Object.entries() remove tipagem
   const entries = Object.entries(controls) as [keyof P & string, AnyControl | undefined][]
 

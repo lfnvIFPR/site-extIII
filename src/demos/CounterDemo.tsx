@@ -5,6 +5,7 @@ export function CounterDemo() {
   return (
     <Playground
       component={Counter}
+      name="Counter"
       initial={{ step: 1, decrement: false }}
       controls={{
         step: { kind: 'range', min: 0, max: 10 },

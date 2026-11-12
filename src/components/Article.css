@@ -14,6 +14,68 @@ article {
         margin-bottom: -1ch;
     }
 
+    blockquote {
+        border-left: 4px solid var(--accent);
+        padding: 16px;
+        background-color: color-mix(in srgb, var(--code-bg), var(--accent-bg));
+        color: var(--accent);
+    }
+
+    table {
+        align-self: center;
+        display: flex;
+        width: 80%;
+        flex-direction: column;
+        align-items: stretch;
+        background-color: var(--code-bg);
+        border: 2px solid var(--border);
+        
+        & * {
+            padding: 0;
+            border: 0;
+        }
+
+        thead {
+            display: flex;
+            justify-content: stretch;
+        }
+        tr {
+            width: 100%;
+            display: flex;
+            align-items: stretch;
+
+            &:nth-child(2n + 1) {
+
+                background-color: color-mix(in srgb, var(--code-bg), black 4%);
+
+                @media (prefers-color-scheme: dark) {
+                    background-color: color-mix(in srgb, var(--code-bg), white 2%);
+                }
+            }
+
+            th, td {
+                flex: 1;
+            }
+            th {
+                text-align: center;
+                border: 1px solid var(--border);
+                padding: 16px;
+            }
+            td {
+                align-self: stretch;
+                text-align: left;
+                border: 1px dotted var(--border);
+                padding: 8px;
+
+                & code {
+                    border: 2px solid var(--border);
+                    padding: 4px;
+                    border-radius: 8px;
+                }
+            }
+        }
+    }
+
     pre {
         display: flex;
         justify-content: center;

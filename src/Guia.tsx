@@ -8,11 +8,15 @@ function Guia() {
 
   return (
     <>
-      <header>Header</header>
       <div className="ticks"></div>
+      <header>Header</header>
       <div className="content">
-        <aside><Sidebar /></aside>
+        <aside>
+          <div className="ticks"></div>
+          <Sidebar />
+        </aside>
         <main>
+          <div className="ticks"></div>
           <Routes>
             <Route path="/" element={<Navigate to={`/${artigos[0].slug}`} replace />} />
             <Route path="/:slug" element={<Article />} />

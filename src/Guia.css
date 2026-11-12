@@ -28,12 +28,25 @@ header, footer {
 .ticks {
   position: relative;
   width: 100%;
+  
+  .content aside &, .content main & {
+    width: calc(100% + 66px);
+    margin: -32px;
+    transform: translateX(-1px);
+    margin-bottom: 32px;
+    @media (max-width: 1024px) {
+      width: calc(100% + 48px - 5px);
+      margin: -24px -20px;
+      margin-bottom: 20px;
+      transform: translateX(-2px);
+    }
+  }
 
   &::before,
   &::after {
     content: '';
     position: absolute;
-    top: -4.5px;
+    transform: translateY(-50%);
     border: 5px solid transparent;
   }
 

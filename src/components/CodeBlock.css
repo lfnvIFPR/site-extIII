@@ -49,9 +49,9 @@
         font-size: 0.875rem;
         line-height: 1.6;
         color: var(--text-h);
-/* 
+
         font-variant-ligatures: common-ligatures contextual;
-        font-feature-settings: 'calt', 'liga'; */
+        font-feature-settings: 'calt', 'liga';
     }
 
     code {

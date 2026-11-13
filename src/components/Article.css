@@ -5,6 +5,10 @@ main > article {
     flex-direction: column;
     gap: 2ch;
 
+    h2, h3 {
+        scroll-margin-top: 3rem;
+    }
+
     h2 {
         margin-top: 4ch;
         padding-bottom: 1ch;

@@ -18,7 +18,8 @@ export function Counter({ step, decrement = false }) {
   const delta = decrement ? -step : step
 
   return (
-    <button type="button" onClick={() => setCount((current) => current + delta)}>
+    <button type="button" 
+      onClick={() => setCount((v) => v + delta)}>
       Count: {count} ({delta > 0 ? '+' : ''}
       {delta})
     </button>

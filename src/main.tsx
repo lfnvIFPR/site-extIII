@@ -6,6 +6,11 @@ import { BrowserRouter } from 'react-router'
 import { MDXProvider } from '@mdx-js/react'
 import { components } from './mdx-components'
 
+import '@fontsource/cascadia-code/400.css'
+import '@fontsource/cascadia-code/400-italic.css'
+import '@fontsource/cascadia-code/700.css'
+import '@fontsource/cascadia-code/700-italic.css'
+
 import './index.css'
 import Guia from './Guia.tsx'
 

@@ -1,0 +1,134 @@
+:root {
+    --tok-comment: #6e7781;
+    --tok-keyword: #cf222e;
+    --tok-string: #0a3069;
+    --tok-number: #0550ae;
+    --tok-title: #8250df;
+    --tok-attr: #116329;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --tok-comment: #8b949e;
+        --tok-keyword: #ff7b72;
+        --tok-string: #a5d6ff;
+        --tok-number: #79c0ff;
+        --tok-title: #d2a8ff;
+        --tok-attr: #7ee787;
+    }
+}
+
+.code-block {
+    width: min(768px, 80%);
+    align-self: center;
+    contain: inline-size;
+    margin-block: 1rem;
+    overflow: hidden;
+    text-align: left;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    &[data-language]::before {
+        content: attr(data-language);
+        display: block;
+        padding: 0.35rem 1rem;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: -0.05em;
+        text-transform: lowercase;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+    }
+
+    pre {
+        margin: 0;
+        padding: 1rem;
+        overflow-x: auto;
+        font-family: var(--mono);
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--text-h);
+/* 
+        font-variant-ligatures: common-ligatures contextual;
+        font-feature-settings: 'calt', 'liga'; */
+    }
+
+    code {
+        display: block;
+        padding: 0;
+        background: none;
+        border-radius: 0;
+        font: inherit;
+        color: inherit;
+    }
+}
+
+.hljs-comment,
+.hljs-quote {
+    color: var(--tok-comment);
+    font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-doctag,
+.hljs-meta,
+.hljs-selector-tag,
+.hljs-deletion {
+    color: var(--tok-keyword);
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+    color: var(--tok-string);
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-built_in,
+.hljs-type {
+    color: var(--tok-number);
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+    color: var(--tok-title);
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-property,
+.hljs-variable,
+.hljs-template-variable {
+    color: var(--tok-attr);
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: 700;
+}
+
+.code-block[data-language='bash'] {
+
+    pre,
+    &[data-language]::before {
+        border-inline-start: 3px solid var(--border);
+    }
+
+    &[data-language]::before {
+        content: "terminal";
+    }
+}
+
+.hljs-declaration {
+    font-style: italic;
+    font-weight: 700;
+    font-feature-settings: 'ss01';
+}

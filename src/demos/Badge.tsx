@@ -1,3 +1,5 @@
+import './Badge.css'
+
 type Variant = 'info' | 'success' | 'warning'
 
 export type BadgeProps = {
@@ -17,6 +19,7 @@ const colors: Record<Variant, string> = {
 export function Badge({ label, size, variant, rounded = false, title }: BadgeProps) {
   return (
     <span
+      id="badge-example"
       title={title}
       style={{
         display: 'inline-block',

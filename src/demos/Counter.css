@@ -3,8 +3,10 @@
     --drop: color-mix(in srgb, var(--accent-bg), black 20%);
     padding: .5em;
     border: none;
+    font-size: 1.5rem;
+    font-weight: 600;
     border-radius: 8px;
-    min-width: 144px;
+    min-width: 196px;
     color: var(--accent);   
     background: var(--accent-bg);
     transform: translateY(-4px);

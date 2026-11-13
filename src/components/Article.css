@@ -26,6 +26,10 @@ main > article {
         color: var(--accent);
     }
 
+    hr {
+        width: 100%;
+    }
+
     table {
         align-self: center;
         display: flex;

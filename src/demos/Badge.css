@@ -1,0 +1,3 @@
+#badge-example {
+    transition: background 0.2s, fontSize 0.5s, borderRadius 0.5s;
+}

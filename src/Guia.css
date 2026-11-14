@@ -1,5 +1,9 @@
-header, footer {
+header {
   height: 10svh;
+}
+
+footer {
+  height: 20svh;
 }
 
 .content {
@@ -26,6 +30,7 @@ header, footer {
 }
 
 .ticks {
+  --size: 5px;
   position: relative;
   width: 100%;
   
@@ -42,12 +47,20 @@ header, footer {
     }
   }
 
+  &:last-of-type:not(:first-of-type) {
+    @media (prefers-color-scheme: light) {
+      opacity: 0;
+    }
+    --border: white;
+    --size: 3px;
+  }
+
   &::before,
   &::after {
     content: '';
     position: absolute;
     transform: translateY(-50%);
-    border: 5px solid transparent;
+    border: var(--size) solid transparent;
   }
 
   &::before {

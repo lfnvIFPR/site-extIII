@@ -1,0 +1,106 @@
+footer {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --border: #2e303a;
+
+    @media (prefers-color-scheme: dark) {
+        border-top: 2px solid white;
+    }
+
+    min-height: 20svh;
+    flex: 1;
+
+    background: black;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+    .atribuicoes {
+        flex: 1;
+        --size: 0.9rem;
+        padding: 1rem;
+        margin-right: 3em;
+        display: flex;
+        font-size: var(--size);
+        letter-spacing: 0.06px;
+        gap: 4rem;
+
+        @media (max-width: 1024px) {
+            --size: 0.7rem;
+            line-height: 1.5;
+        }
+
+        #gem {
+            align-self: center;
+
+            margin: 0 auto;
+            height: 2em;
+            stroke-width: 1px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            text-align: left;
+
+            &:last-of-type {
+                margin-left: auto;
+                text-align: right;
+            }
+
+            hr {
+                width: 80%;
+                margin: 1em 0 1em auto;
+            }
+        }
+
+        svg {
+            height: calc(var(--size) - 0.2rem);
+            width: fit-content;
+            margin-right: 0.5ch;
+            transform: translateY(10%);
+        }
+
+        a {
+            color: var(--text-h);
+            text-decoration: none;
+
+            &:hover {
+                svg {
+                    stroke-width: 3px;
+                }
+
+                font-weight: 600;
+            }
+        }
+    }
+
+    .logo {
+        height: 100%;
+        box-sizing: border-box;
+        margin-left: auto;
+        padding: 0.5rem;
+        width: 144px;
+        border-left: 2px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+
+        .if {
+            height: 4rem;
+            width: fit-content;
+        }
+
+        span {
+            display: inline-block;
+            font-size: 1rem;
+            text-align: center;
+
+            pointer-events: none;
+            user-select: none;
+        }
+    }
+}

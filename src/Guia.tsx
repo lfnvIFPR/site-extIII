@@ -3,13 +3,15 @@ import { artigos } from './artigos';
 import './Guia.css'
 import Sidebar from './components/Sidebar';
 import Article from './components/Article';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function Guia() {
 
   return (
     <>
       <div className="ticks"></div>
-      <header>Header</header>
+      <Header />
       <div className="content">
         <aside>
           <div className="ticks"></div>
@@ -25,7 +27,7 @@ function Guia() {
         </main>
       </div>
       <div className="ticks"></div>
-      <footer>Footer</footer>
+      <Footer />
     </>
   )
 }

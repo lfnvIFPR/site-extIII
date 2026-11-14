@@ -71,7 +71,6 @@
   max-width: 100%;
   margin: 0 auto; */
   text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -124,4 +123,27 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+.icon {
+  display: block;
+  color: var(--text);
+  
+  button:has(>&) {
+    cursor: pointer;
+    background: transparent;
+    border-radius: 8px;
+    padding: 0.5rem;
+    border: none;
+  }
+
+
+  button:hover:has(>&) {
+    background-color: color-mix(in srgb, var(--bg), var(--accent-bg));
+  }
+  
+  button:hover>& {
+    color: var(--text-h);
+    stroke-width: 3px;
+  }
 }

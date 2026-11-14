@@ -1,6 +1,6 @@
 import "./Footer.css";
 import Logo from '../assets/icon.svg?react'
-import { Atom, Gem, Globe, Package, Scroll, Shell, ShipWheel, SquareLetterM, SquareLetterT, Type } from "lucide-react";
+import { Atom, Globe, Package, Scroll, Shell, ShipWheel, SquareLetterM, SquareLetterT, Type } from "lucide-react";
 
 
 export default function Footer() {

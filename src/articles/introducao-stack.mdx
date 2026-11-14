@@ -1,0 +1,679 @@
+export const meta = { title: 'Tecnologias básicas', order: 2, chapter: 0 }
+
+
+# As Tecnologias básicas da programação web
+
+As três tecnologias que vamos conhecer neste módulo são:
+
+- **HTML:** estrutura e organiza o conteúdo da página.
+- **CSS:** define a aparência, como cores, tamanhos e espaçamentos.
+- **JavaScript:** adiciona comportamentos, como responder a cliques e alterar textos.
+
+Podemos usar uma analogia para entender essa divisão: o HTML funciona como a estrutura de uma casa, o CSS define sua aparência e o JavaScript permite criar interações. Na prática, as três tecnologias trabalham em conjunto.
+
+
+## HTML
+
+HTML significa *HyperText Markup Language*, ou seja, é uma **linguagem de marcação**. O HTML é utilizado para organizar o conteúdo de uma página por meio de elementos, geralmente escritos com tags.
+
+**Exemplo básico de um arquivo HTML**
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu primeiro site</title>
+</head>
+<body>
+    <div>
+        <h1>Bem-vindo ao meu site!</h1>
+        <p>Este é o meu primeiro parágrafo criado no curso.</p>
+        <a href="https://google.com">
+            Clique aqui para ir ao Google
+        </a>
+    </div>
+</body>
+</html>
+```
+
+**Entendendo a estrutura:**
+
+- `<!DOCTYPE html>` informa ao navegador que o documento utiliza HTML moderno.
+- `<html>` envolve todo o conteúdo da página. O atributo `lang="pt-BR"` informa que o idioma principal é português do Brasil.
+- `<head>` contém os metadados sobre a página, como seu título e configurações.
+- `<meta charset="UTF-8">` define a codificação de caracteres, ajudando a exibir corretamente acentos e símbolos.
+- `<title>` define o título que aparece na aba do navegador.
+- `<body>` contém o conteúdo apresentado na página.
+
+### A anatomia de uma tag
+
+Toda tag de HTML tem o mesmo formato. Duas estruturas delimitadas por setas `<>` abrem e fecham. Existe o lado que abre a tag, e o lado que fecha a tag, que deve ser registrado como `</>`.
+
+> Algumas tags HTML podem se fechar automaticamente. É o caso da tag `<br>`, por exemplo.
+
+Todo elemento tem um *nome da tag* que representa o objeto que você irá adicionar. Ao seu lado, você pode alterar valores, chamados de *atributos*. Esses atributos indicam como esse elemento se comporta. Os atributos só podem ser inseridos no lado que abre a tag, e não são duplicados ao lado que fecha a tag. Alguns atributos podem não necessitar de valor, apenas estando presentes.
+
+```
+<nome-da-tag atributo="valor" vezes=3 desativado> </nome-da-tag>
+```
+
+Essa estrutura está presente em qualquer tag.
+
+```html
+<h1>Bem-vindo ao meu site!</h1>
+<p>Este é o meu primeiro parágrafo criado no curso.</p>
+<a href="https://google.com">Google</a>
+```
+
+### Tags essenciais
+
+Para este início, não precisamos decorar todas as tags HTML. Vamos começar pelas mais básicas que iremos utilizar neste curso.
+
+- **`<h1>` e `<h2>`**
+  - A tag `<h1>` representa o título principal da página ou do conteúdo. A tag `<h2>` representa um título de seção ou subtítulo. Existem níveis de `<h1>` até `<h6>`, que devem ser usados de acordo com a hierarquia do conteúdo.
+
+  Exemplo:
+  ```html
+  <h1>Meu site</h1>
+  <h2>Sobre mim</h2>
+  ```
+
+- **`<p>`**
+  - A tag `<p>` é utilizada para representar um parágrafo de texto.
+
+  Exemplo:
+  ```html
+  <p>Estou aprendendo desenvolvimento web.</p>
+  ```
+
+- **`<a>`**
+  - A tag `<a>` cria um link para outra página ou endereço. O atributo `href` define o destino.
+
+  Exemplo:
+  ```html
+  <a href="https://google.com">Acessar o Google</a>
+  ```
+
+- **`<div>`**
+  - A tag `<div>` agrupa elementos, funcionando como um contêiner genérico. Ela é útil quando queremos organizar elementos ou aplicar estilos a um grupo, mas não descreve por si só o significado do conteúdo.
+
+  Exemplo:
+  ```html
+  <div>
+      <h2>Sobre o curso</h2>
+      <p>Este conteúdo está agrupado em uma div.</p>
+  </div>
+  ```
+
+- **`<img>`**
+  - A tag `<img>` exibe uma imagem. O atributo `src` indica o caminho da imagem e `alt` descreve seu conteúdo.
+
+  Exemplo:
+  ```html
+  <img src="imagem.jpg" alt="Descrição da imagem">
+  ```
+
+- **`<ul>`, `<ol>` e `<li>`**
+  - A tag `<ul>` e `<ol>` cria uma lista com marcadores, e cada `<li>` representa um item da lista. A diferença entre elas é que `<ul>` representa uma lista não-ordenada (**u**nordered **l**ist) e `<ol>` uma lista ordenada (**o**rdered **l**ist).
+
+  Exemplo:
+  ```html
+  <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+  </ul>
+  <ol>
+      <li>Lavar o rosto</li>
+      <li>Preparar o café</li>
+      <li>Começar a trabalhar</li>
+  </ol>
+  ```
+
+- **`<button>`**
+  - A tag `<button>` cria um botão. Ele pode ser utilizado, por exemplo, para iniciar uma ação por meio de JavaScript.
+
+  Exemplo:
+  ```html
+  <button>Clique aqui</button>
+  ```
+
+- **`<link>`**
+  - A tag `<link>` permite relacionar o HTML a um arquivo externo, como uma folha de estilos CSS. Ela costuma ficar dentro do `<head>`.
+
+  Exemplo:
+  ```html
+  <link rel="stylesheet" href="style.css">
+  ```
+
+### Atributos básicos
+
+Atributos fornecem informações adicionais aos elementos HTML. Alguns que usaremos com frequência são:
+
+- `href`: define o destino de um link.
+- `src`: define o caminho de uma imagem ou recurso.
+- `alt`: fornece uma descrição textual para uma imagem.
+- `class`: atribui uma classe que pode ser utilizada para aplicar estilos CSS.
+- `id`: identifica um elemento específico, podendo ser utilizado para encontrá-lo com JavaScript.
+
+Exemplo:
+
+```html
+<h1 class="titulo" id="mensagem">Olá, mundo!</h1>
+```
+
+Nesse exemplo, o elemento possui a classe `titulo` e o identificador `mensagem`. A classe poderá ser utilizada no CSS, enquanto o ID poderá ser utilizado, por exemplo, para localizar esse título com JavaScript.
+
+### HTML semântico
+
+HTML semântico consiste em escolher elementos de acordo com o significado do conteúdo, e não apenas pela aparência ou pela necessidade de agrupá-lo. Isso torna o código mais organizado e facilita sua compreensão por desenvolvedores, navegadores e tecnologias assistivas.
+
+Por exemplo, poderíamos montar toda a página usando apenas `<div>`. Entretanto, quando existem elementos mais específicos, vale utilizá-los para deixar clara a função de cada parte.
+
+As principais tags semânticas que vamos conhecer são:
+
+- `<header>`: representa o cabeçalho da página ou de uma seção. Pode conter o título e outras informações introdutórias.
+- `<nav>`: agrupa links de navegação, como os links para as principais áreas do site.
+- `<main>`: identifica o conteúdo principal da página.
+- `<section>`: agrupa conteúdos relacionados, geralmente organizados em torno de um assunto.
+- `<article>`: representa um conteúdo que pode ser compreendido de forma independente, como uma notícia ou publicação.
+- `<footer>`: representa o rodapé da página ou de uma seção.
+
+**Exemplo de estrutura semântica:**
+
+```html
+<body>
+    <header>
+        <h1>Meu site</h1>
+    </header>
+
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <main>
+        <section id="sobre">
+            <h2>Sobre o site</h2>
+            <p>Este é o conteúdo principal da página.</p>
+        </section>
+
+        <section id="contato">
+            <h2>Contato</h2>
+            <p>Entre em contato conosco.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Meu site - 2026</p>
+    </footer>
+</body>
+```
+
+Aqui, cada elemento indica a finalidade de uma parte da página: o cabeçalho fica em `<header>`, os links de navegação em `<nav>`, o conteúdo principal em `<main>` e as seções relacionadas em `<section>`. O rodapé fica em `<footer>`.
+
+Diferente das tags semânticas a `<div>` é um contêiner genérico e não informa qual é a função do conteúdo. Já tags como `<header>`, `<nav>`, `<main>` e `<footer>` descrevem a função da região. Isso não significa que a `<div>` seja errada: ela continua sendo útil quando não existe uma tag semântica mais adequada.
+
+## CSS
+
+CSS significa Cascading Style Sheets (Folhas de Estilo em Cascata). Ele define a aparência dos elementos HTML, como cores, tamanhos, fontes e espaçamentos.
+
+Exemplo:
+
+```css
+h1 {
+    color: blue;
+}
+```
+
+Nesse exemplo, `h1` é o seletor e `color: blue;` é a declaração que define a cor azul para o título.
+
+### Formas de utilizar CSS
+
+- **CSS inline**
+  - Escrito diretamente no elemento HTML por meio do atributo `style`.
+
+  Exemplo:
+  ```html
+  <h1 style="color: red;">Meu título</h1>
+  ```
+
+- **CSS interno**
+  - Escrito no próprio arquivo HTML, dentro da tag `<style>`, geralmente no `<head>`.
+
+  Exemplo:
+  ```html
+  <style>
+      h1 {
+          color: red;
+      }
+  </style>
+  ```
+
+- **CSS externo**
+  - Escrito em um arquivo separado, normalmente com a extensão `.css`. Essa será a forma preferencial nos exemplos do curso, pois mantém o HTML e o CSS organizados.
+
+  Exemplo:
+  Arquivo `style.css`:
+
+  ```css
+  h1 {
+      color: blue;
+  }
+  ```
+
+  No arquivo `index.html`, conectamos o CSS dentro do `<head>`:
+
+  ```html
+  <link rel="stylesheet" href="style.css">
+  ```
+
+### Classes no CSS
+
+Classes permitem aplicar um estilo a elementos escolhidos. No HTML, utilizamos o atributo `class`; no CSS, escrevemos o nome da classe precedido por ponto (`.`).
+
+Exemplo:
+Arquivo `style.css`:
+
+```css
+.titulo {
+    color: blue;
+}
+```
+
+```html
+<h1 class="titulo">Meu título azul</h1>
+<h1>Outro título</h1>
+```
+
+A regra `.titulo` será aplicada somente ao elemento que possui `class="titulo"`. Assim, podemos escolher quais elementos receberão determinado estilo.
+
+**Algumas propriedades CSS importantes para este módulo:**
+
+- `color`: cor do texto.
+- `background-color`: cor de fundo.
+- `font-size`: tamanho da fonte.
+- `width` e `height`: largura e altura.
+- `margin`: espaçamento externo.
+- `padding`: espaçamento interno.
+- `display`: define como o elemento será disposto no layout.
+- `gap`: define o espaço entre itens em layouts como Flexbox.
+
+### Flexbox
+
+Flexbox é um recurso do CSS que ajuda a organizar elementos dentro de um contêiner. Com ele, podemos posicionar itens em linha ou coluna e controlar o alinhamento e o espaço entre eles.
+
+**Exemplo de CSS:**
+
+```css
+.pai {
+    display: flex;
+    gap: 20px;
+}
+
+.filho {
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+}
+```
+
+**Exemplo de HTML:**
+
+```html
+<div class="pai">
+    <div class="filho"></div>
+    <div class="filho"></div>
+    <div class="filho"></div>
+</div>
+```
+
+A classe `pai` recebe `display: flex`, ativando o Flexbox para organizar seus elementos filhos. Por padrão, eles ficam em uma linha. A propriedade `gap: 20px` cria um espaço entre eles. A classe `filho` define a cor e as dimensões dos quadrados.
+
+### Alterando a direção com `flex-direction`
+
+A propriedade `flex-direction` define a direção dos itens.
+
+Exemplo:
+
+```css
+.pai {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+```
+
+Os valores mais utilizados neste primeiro contato são:
+
+- `row`: organiza os itens em linha. É o valor padrão.
+- `column`: organiza os itens em coluna, um abaixo do outro.
+
+### Alinhamento básico
+
+Também podemos utilizar:
+
+- `justify-content`: controla a distribuição dos itens no eixo principal.
+- `align-items`: controla o alinhamento dos itens no eixo transversal.
+- `gap`: define o espaço entre os itens.
+
+Exemplo:
+
+```css
+.pai {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+```
+
+Experimente alterar os valores e observar como os elementos se movimentam. O resultado depende da direção do Flexbox e do tamanho do contêiner.
+
+## Javascript
+
+Diferente do HTML e do CSS, o JavaScript é uma linguagem de programação completa. Programar significa escrever uma sequência lógica de passos para que o computador tome decisões, faça cálculos, repita tarefas e responda às interações do usuário na página.
+
+### Como Escrever e Testar Javascript no Navegador
+
+O código JavaScript pode ser escrito dentro da tag `<script>` no arquivo HTML ou em um arquivo separado com extensão `.js` (como `script.js`), preferencialmente posicionado no final do `<body>` para garantir que os elementos HTML já existam na tela antes de o código rodar. Você também pode colocá-lo em qualquer lugar utilizando o atributo `defer` na tag, da seguinte forma:
+
+```html
+<script defer s>
+```
+
+Para visualizar os resultados dos nossos primeiros códigos durante o aprendizado, utilizamos o comando `console.log()`, que exibe mensagens no painel Console das Ferramentas do Desenvolvedor do navegador (acessível pressionando a tecla `F12`, na maioria dos navegadores, ou clicando com o botão direito na página > Inspecionar > aba Console).
+
+> Caso queira simplesmente rodar uma linha de teste de Javascript, abra o Console e rode qualquer linha de código. Não precisa configurar um ambiente inteiro!
+
+### Variáveis e Tipos de Dados Primitivos
+
+Para um programa funcionar, ele precisa guardar informações temporariamente. Uma variável funciona como uma "caixa etiquetada" na memória do computador onde armazenamos um dado para usar ou modificar depois.
+No JavaScript moderno, criamos variáveis usando duas palavras-chave:
+
+- `var`: Cria uma variável na memória cujo valor pode ser alterado durante a execução do programa.
+- `let`: Cria uma variável cujo valor pode mudar ao longo da execução do programa (ex.: pontuação de um jogo, idade, contador), mas fica restrita ao escopo `{}` onde foi criada, evitando conflitos.
+- `const`: Cria uma caixa cujo valor não pode ser reatribuído após ser definido (ex.: nome de um usuário, taxa fixa). Na programação moderna, priorizamos seu uso.
+
+
+> A diferença técnica entre `var` e `let` está no escopo de função ou global: uma variável declarada com `var` "vaza" para fora de blocos de chaves (como `if` ou `for`) e permite ser redeclarada com o mesmo nome sem acusar erro. Por essas características facilitarem falhas acidentais em códigos maiores, o `let` passou a ser adotado como padrão moderno para valores mutáveis.
+> `var` foi a primeira forma criada em Javascript, mas hoje em dia está praticamente em desuso, substituídas por `let` e `const`. Comentaremos melhor no próximo módulo.
+
+**Os Tipos de Dados Básicos e Concatenação de Textos:**
+
+- **String:** Qualquer sequência de caracteres escrita entre aspas duplas (`"..."`) ou simples (`'...'`). Podemos juntar textos e variáveis usando o sinal de `+` (processo chamado de concatenação).
+- **Number:** Números inteiros ou decimais (separados por ponto, não vírgula), usados para cálculos matemáticos.
+- **Boolean:** Representa um valor lógico que só possui duas possibilidades: verdadeiro (`true`) ou falso (`false`).
+- **Undefined/Null:** Indicam ausência de valor (`undefined` quando uma variável foi criada mas ainda não recebeu valor; `null` quando definimos propositalmente que ela está vazia).
+
+```javascript
+// 'var' cria uma variável que permite alterar seu valor
+var escola = "Curso Web";
+escola = "Portal do Curso Web";
+
+// String com 'const' e concatenação usando '+'
+const nome = "Ana";
+const mensagem = "Bem-vinda, " + nome + "!";
+
+// Number com 'let' (permite atualização)
+let idade = 19;
+idade = 20;
+
+// Boolean
+const matriculada = true;
+
+// Exibindo os valores guardados no Console do navegador
+console.log(escola);                // Exibe: "Portal do Curso Web"
+console.log(mensagem);              // Exibe: "Bem-vinda, Ana!"
+console.log("Idade:", idade);       // Exibe: 20
+console.log("Ativa?", matriculada); // Exibe: true
+```
+
+### Operadores Aritméticos, Comparadores e Lógicos
+
+**Aritiméticos:**
+
+- `+`: Soma
+- `-`: Subtração
+- `*`: Multiplicação
+- `/`: Divisão
+- `%`: Resto da divisão
+
+**Comparadores:**
+
+- `===`: igual a ()
+- `!==`: diferente de ()
+- `>`: maior a ()
+- `<`: menor a ()
+- `>=`: maior ou igual a ()
+- `<=`: menor ou igual a ()
+
+**Lógicos:**
+
+- `&&`: E(AND) (quando ambas comparações forem verdadeiras)
+- `||`: OU(OR) (quando pelo menos uma das comparações forem verdadeira)
+- `!`: Negado(NOT) (troca o sinal booleano)
+
+Exemplo:
+
+```javascript
+const nota1 = 8;
+const nota2 = 6;
+const media = (nota1 + nota2) / 2; // Resultado: 7
+
+console.log("Média final:", media);
+console.log("A média é maior ou igual a 7?", media >= 7); // Resultado: true
+```
+
+### 7.4. Estruturas Condicionais
+
+Em aplicações computacionais, o fluxo de execução frequentemente precisa seguir caminhos distintos de acordo com o estado dos dados avaliados. As estruturas condicionais controlam esse fluxo por meio de expressões lógicas que resultam em verdadeiro (`true`) ou falso (`false`). Em JavaScript, empregam-se as instruções `if` (se), `else if` (senão se) e `else` (senão) para determinar qual bloco de código será executado conforme o resultado de cada verificação.
+
+Exemplo:
+
+```javascript
+const notaFinal = 6.5;
+
+if (notaFinal >= 7) {
+    console.log("Parabéns! Você foi aprovado.");
+} else if (notaFinal >= 5) {
+    console.log("Você está em recuperação.");
+} else {
+    console.log("Infelizmente, você foi reprovado.");
+}
+```
+
+### Arrays e Objetos
+
+Até agora, guardamos apenas um valor por variável. Porém, em um site real, precisamos lidar com listas inteiras (lista de produtos, lista de alunos, menu de opções). Para isso existem os Arrays e os Objetos.
+
+#### Array
+
+Um Array é uma variável especial capaz de armazenar vários valores organizados em sequência dentro de colchetes `[ ]`, separados por vírgula. Pense nele como uma prateleira numerada.
+Na computação, a contagem das posições (chamadas de índices) sempre começa no número `0`, e não no `1`.
+
+Exemplo:
+
+```javascript
+// Criando um Array (lista) com 3 frutas
+// Índices: [0,1,2]
+const frutas = ["Maçã", "Banana", "Laranja"];
+
+// Acessando itens pela posição (índice)
+console.log(frutas[0]); // Exibe: "Maçã" (primeiro item)
+console.log(frutas[1]); // Exibe: "Banana" (segundo item)
+
+// Descobrindo quantos itens existem na lista (.length)
+console.log("Total de frutas:", frutas.length); // Exibe: 3
+
+// Adicionando elementos (.push no final | .unshift no início)
+frutas.push("Uva");         // ["Maçã", "Morango", "Laranja", "Uva"]
+frutas.unshift("Abacaxi");  // ["Abacaxi", "Maçã", "Morango", "Laranja", "Uva"]
+
+// Removendo elementos (.pop do final | .shift do início)
+const ultima = frutas.pop();     // Remove "Uva" do final
+const primeira = frutas.shift(); // Remove "Abacaxi" do início
+// Array atual: ["Maçã", "Morango", "Laranja"]
+
+// Removendo ou substituindo em uma posição específica (.splice)
+// A partir do índice 1 ("Morango"), remove 1 elemento:
+frutas.splice(1, 1); // Array atual: ["Maçã", "Laranja"]
+
+// Buscando elementos e convertendo para texto (.includes, .indexOf, .join)
+console.log(frutas.includes("Maçã"));   // Exibe: true
+console.log(frutas.indexOf("Laranja")); // Exibe: 1
+console.log(frutas.join(", "));         // Exibe: "Maçã, Laranja"
+```
+
+#### Objetos
+
+Enquanto o Array organiza itens em uma lista sequencial indexada por números, o Objeto utiliza chaves `{}` para agrupar diversas características (propriedades) de uma mesma entidade.
+
+```javascript
+// Criando um objeto que representa um aluno
+const aluno = {
+    nome: "Mariana",
+    curso: "Desenvolvimento Web",
+    moduloAtual: 0
+};
+
+// Lendo propriedades (notação de ponto ou colchetes)
+console.log(aluno.nome);        // Exibe: "Mariana"
+console.log(aluno["curso"]);    // Exibe: "Desenvolvimento Web"
+
+// Alterando o valor de uma propriedade existente
+aluno.moduloAtual = 1;
+
+// Adicionando uma nova propriedade ao objeto
+aluno.matriculado = true;
+
+// Removendo uma propriedade com o operador 'delete'
+delete aluno.curso;
+
+console.log(aluno); // { nome: "Mariana", moduloAtual: 1, matriculado: true }
+```
+
+### Estruturas de Repetição while e for
+
+Imagine que você precise exibir os números de 1 a 100 ou ler todos os 50 itens de um Array. Escrever 100 linhas de `console.log()` manualmente seria inviável. Os laços de repetição permitem repetir um bloco de código automaticamente enquanto uma condição for verdadeira.
+
+#### while
+
+O `while` significa "enquanto". Ele verifica uma condição antes de cada volta; enquanto essa condição for verdadeira, o código dentro das chaves continua se repetindo. É ideal quando não sabemos previamente quantas vezes a repetição vai acontecer.
+
+> Dentro de um `while`, é necessário alterar a variável da condição a cada volta (por exemplo, aumentando um contador), caso contrário o programa entra em um loop infinito e trava o navegador.
+
+Exemplo:
+
+```javascript
+let contador = 1;
+
+// Enquanto o contador for menor ou igual a 5, repita o bloco:
+while (contador <= 5) {
+    console.log("Contagem com while:", contador);
+    contador++; // Soma +1 ao contador a cada volta (equivalente a: contador = contador + 1)
+}
+```
+
+#### do while
+
+Após compreender o `while` tradicional, existe também sua variação `do...while`, que executa o bloco de código pelo menos uma vez antes de verificar se a condição é verdadeira
+
+Exemplo:
+
+```javascript
+let numero = 10;
+
+do {
+    console.log("Executou pelo menos uma vez, mesmo sendo maior que 5:", numero);
+    numero++;
+} while (numero <= 5);
+```
+
+#### for
+
+O `for` é uma estrutura mais compacta, ideal quando já sabemos o início, o fim e o passo da contagem. Ele reúne três instruções separadas por ponto e vírgula dentro dos parênteses: `for (início; condição; incremento)`.
+
+```javascript
+// Exemplo 1: Contagem simples de 1 até 5
+// let i = 1 (começa em 1) | i <= 5 (vai até 5) | i++ (aumenta de 1 em 1)
+for (let i = 1; i <= 5; i++) {
+    console.log("Aula número:", i);
+}
+
+// Exemplo 2: Usando o 'for' para ler todos os itens de um Array
+const tecnologias = ["HTML", "CSS", "JavaScript"];
+
+// O índice 'i' começa em 0 e vai até tecnologias.length - 1 (ou seja, 0, 1 e 2)
+for (let i = 0; i < tecnologias.length; i++) {
+    console.log("Posição", i, ":", tecnologias[i]);
+}
+```
+
+### Funções
+
+Uma função é como uma "receita" nomeada que guarda um conjunto de instruções. Em vez de reescrever a mesma lógica várias vezes, criamos um bloco de código reutilizável com a palavra-chave `function` e a chamamos sempre que precisarmos.
+Funções podem receber dados de entrada (chamados de parâmetros) e devolver um resultado final usando a palavra `return`.
+
+Exemplo:
+
+```javascript
+// Função simples sem parâmetros
+function darBoasVindas() {
+    console.log("Bem-vindo ao Módulo 0 do curso Web!");
+}
+
+// Chamando a função
+darBoasVindas();  // saída: Bem-vindo ao Módulo 0 do curso Web!
+
+// Função com parâmetros e return
+function somar(a, b) {
+    return a + b; // Devolve o valor calculado para quem chamou a função
+}
+
+const total = somar(15, 25);
+console.log("Resultado da soma:", total); // Exibe: 40
+```
+
+### Aplicando JavaScript na Página
+
+Agora que já conhecemos variáveis e funções, podemos unir o JavaScript ao HTML que aprendemos anteriormente para criar interações reais na tela.
+
+#### alert
+
+```html
+<button onclick="alert('Olá! Seja bem-vindo ao curso!')">
+    Clique em mim!
+</button>
+```
+
+A tag `<button>` cria o botão. O atributo `onclick` indica uma ação a executar quando ocorre um clique, e `alert()` exibe uma mensagem no navegador.
+Esse formato é útil para o primeiro exemplo; mais adiante, podemos separar o JavaScript do HTML.
+
+#### Alterando um texto
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo com JavaScript</title>
+</head>
+<body>
+    <h1 id="mensagem">Texto antigo</h1>
+    <button onclick="mudarTexto()">Trocar mensagem</button>
+
+    <script>
+        function mudarTexto() {
+            document.getElementById("mensagem").innerText = "Texto trocado!";
+        }
+    </script>
+</body>
+</html>
+```
+
+- `function mudarTexto()` cria uma função chamada `mudarTexto`.
+- `document.getElementById("mensagem")` localiza o elemento que possui o ID `mensagem`.
+- `.innerText` permite alterar o texto desse elemento.
+- Ao clicar no botão, `onclick` chama a função e o título passa a exibir “Texto trocado!”.

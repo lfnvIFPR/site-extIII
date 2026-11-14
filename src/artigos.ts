@@ -2,8 +2,8 @@
 import type { ComponentType } from "react";
 
 export const tituloCapitulos: Record<number, string> = {
-  1: 'Módulo 0: introdução',
-  2: 'Módulo 1: fluxo de dados',
+  0: 'Módulo 0: Fundamentos e Ambiente de Desenvolvimento',
+  1: 'Módulo 1: fluxo de dados',
 }
 
 type Meta = { title: string; order: number; chapter: number; }

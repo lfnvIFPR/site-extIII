@@ -1,0 +1,144 @@
+import { GitStagesDemo } from '../demos/GitStagesDemo'
+import { GitRemoteDemo } from '../demos/GitRemoteDemo'
+
+export const meta = { title: 'Git e Github', order: 1, chapter: 0 }
+
+# *Git* e *Github*
+
+## O que é Git?
+
+Git é uma ferramenta de controle de versão (SCM). Ela registra alterações feitas em um projeto, permitindo acompanhar sua evolução e consultar versões anteriores.
+
+Imagine que você esteja desenvolvendo uma calculadora. Primeiro, ela realiza somas; depois, você adiciona subtração e multiplicação. Se uma nova alteração causar um erro, o histórico do Git ajuda a identificar a mudança e recuperar uma versão anterior do projeto.
+
+Mesmo que seja um projeto pequeno, é útil aplicar o versionamento do Git. Mas uma ferramenta potente que nos auxilia na pesquisa é uma extensão do Git.
+
+## O que é GitHub?
+
+GitHub é uma plataforma online que permite hospedar repositórios Git, compartilhar projetos e colaborar com outras pessoas. Mas para quem deseja desenvolver aplicações Web, a plataforma serve como uma ferramenta útil, pois permite **hospedar páginas estáticas gratuitamente**. Ou seja, você não se preocupa com um servidor, ou comprar um domínio, ou alquer outra sujeira por trás de hospedar sua própia página Web. Essa tecnologia se chama GitHub Pages, e iremos abordar como utilizá-la logo depois.
+
+
+> Git é a ferramenta que registra o histórico de alterações, chamado de *versionamento*.
+> GitHub é a plataforma que permite hospedar repositórios Git online e colaborar com outros desenvolvedores.
+
+---
+
+## Instalando e configurando o Git
+
+1. Acesse https://git-scm.com/ e baixe o instalador correspondente ao seu sistema.
+2. Execute o instalador. Para começar, as opções padrão geralmente são suficientes.
+3. Abra o terminal do computador ou o terminal integrado do VS Code.
+4. Digite o comando abaixo para verificar a instalação:
+
+```bash
+git --version
+```
+
+Para configurar o nome e o e-mail utilizados nos commits, execute os comandos a seguir, substituindo os exemplos pelos seus dados:
+
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seuemail@exemplo.com"
+```
+
+## Criação de Repositório e Ciclo de Versionamento
+
+Para iniciar o controle de versão em um diretório local e registrar pontos de salvamento no histórico, utiliza-se o fluxo fundamental em quatro etapas:
+
+| Etapa | Comando | Descrição |
+| --- | --- | --- |
+| Inicializar o Repositório | `git init` | Cria a estrutura interna oculta (`.git`) que habilita o rastreamento na pasta do projeto. |
+| Verificar Estado | `git status` | Lista os arquivos criados, modificados ou prontos para serem salvos. |
+| Preparar Arquivos | `git add` | Move as alterações desejadas para a área de preparação (Staging Area). |
+| Registrar Versão | `git commit` | Grava permanentemente o conjunto de alterações preparadas no histórico local, acompanhado de uma mensagem descritiva. |
+
+```bash
+git init
+git status
+git add index.html
+git add .
+git commit -m "estrutura inicial da pagina HTML"
+```
+### Demonstração das etapas
+<GitStagesDemo />
+
+
+## Branch e Merge de Código
+
+Em projetos reais, evita-se desenvolver novas funcionalidades diretamente na linha principal de produção (geralmente chamada de `main`). Para isolar o desenvolvimento de novos trechos ou correções sem comprometer a `main`, utilizam-se as branches(ramificações).
+Após desenvolver o código separadamente podemos junta-las com a linha de código principal utilizando o merge(fusão).
+
+- **Branch (Ramificação):** Uma linha independente de desenvolvimento derivada da branch principal.
+- **Merge (Fusão, união):** O processo de integrar as alterações concluídas e testadas de uma branch secundária de volta para a branch principal (`main`).
+
+```sh
+# Lista todas as branches locais (a atual aparece marcada com *)
+git branch
+
+# Cria uma nova branch e muda imediatamente para ela
+git checkout -b branch-fulano
+
+# Após editar os arquivos, adicionar e dar commit na nova branch
+git add .
+git commit -m "mudança do código fulano"
+
+# Retorna para a branch principal (main)
+git checkout main
+
+# Mescla (une) as alterações da branch 'branch-fulano' dentro da 'main'
+git merge branch-fulano
+```
+
+> **Conflitos de Merge** ocorrem caso duas branches alterem exatamente as mesmas linhas de um mesmo arquivo. O Git detecta e sinaliza um *conflito de merge*, solicitando que o desenvolvedor escolha manualmente qual versão do código deve prevalecer antes de concluir o commit de fusão. Issó é feito em um editor de texto; a parte do branch atual estará entre caracteres de `<` e `=`, enquanto a parte do branch externo estará entre `>` e `=`.
+> ```
+> <<<<<<< HEAD
+> (O que está na sua branch atual)
+> =======
+> (O que veio da outra branch)
+>>>>>>> outra-branch
+> ```
+
+## Sincronização com Repositório Remoto GitHub
+
+Após criar um repositório vazio no GitHub, vincula-se o projeto local ao endereço remoto para *push* (envio) e *pull* (atualizações) de código. Essas operações trabalham com commits, então quando você envia para o servidor, os seus commits é o que atualiza.
+
+Na primeira vez que você executar um push, utilize a opção `-u` para registrar o branch remoto.
+
+
+```bash
+git remote add origin https://github.com/usuario/nome-do-repositorio.git
+git push -u origin main
+```
+
+posteriormente,
+
+```bash
+git push origin main
+```
+
+Para atualizar:
+
+```bash
+git pull origin main
+```
+
+Após isso, todos seus commits locais serão salvos na plataforma do GitHub.
+
+<GitRemoteDemo />
+
+
+
+## Resumo
+
+| Comando | Descrição |
+| --- | --- |
+| `git init` | Inicializa um novo repositório Git local no diretório atual. |
+| `git status` | Exibe o estado da árvore de trabalho e da área de preparação. |
+| `git add .` | Adiciona todos os arquivos modificados/novos à área de preparação (Staging). |
+| `git commit -m ""` | Registra um novo ponto no histórico de versões com uma mensagem descritiva. |
+| `git branch` | Lista as ramificações existentes no repositório local. |
+| `git checkout -b nome` | Cria uma nova branch e alterna o ambiente de trabalho para ela. |
+| `git checkout main` | Retorna para a branch principal do projeto. |
+| `git merge nome` | Integra o histórico e as alterações de outra branch na branch atual. |
+| `git push origin main` | Envia os commits locais para o repositório remoto no GitHub. |
+| `git pull origin main` | Obtém e mescla alterações recentes do repositório remoto para o local. |

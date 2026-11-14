@@ -5,6 +5,18 @@ main > article {
     flex-direction: column;
     gap: 2ch;
 
+    h1 {
+        font-size: 56px;
+        letter-spacing: -1.68px;
+        line-height: 1;
+        text-align: left;
+        margin: 32px 0;
+        @media (max-width: 1024px) {
+            font-size: 36px;
+            margin: 20px 0;
+        }
+    }
+
     h2, h3 {
         scroll-margin-top: 3rem;
     }
@@ -31,32 +43,32 @@ main > article {
     }
 
     table {
+        margin: 1.5rem 0;
         align-self: center;
-        display: flex;
+        display: grid;
         width: 80%;
-        flex-direction: column;
-        align-items: stretch;
         background-color: var(--code-bg);
         border: 2px solid var(--border);
-        
+
         & * {
             padding: 0;
             border: 0;
             box-sizing: border-box;
         }
 
-        thead {
-            display: flex;
-            justify-content: stretch;
+        thead, tbody {
+            display: grid;
+            grid-column: 1 / -1;
         }
+
         tr {
             width: 100%;
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(var(--table-column-count), minmax(0, 1fr));
             align-items: stretch;
             justify-content: stretch;
 
             &:nth-child(2n + 1) {
-
                 background-color: color-mix(in srgb, var(--code-bg), black 4%);
 
                 @media (prefers-color-scheme: dark) {
@@ -65,9 +77,7 @@ main > article {
             }
 
             td, th {
-                flex-grow: 0;
-                flex-shrink: 0;
-                width: calc(100% / 3);
+                min-width: 0;
             }
 
             th {
@@ -75,6 +85,7 @@ main > article {
                 border: 1px solid var(--border);
                 padding: 16px;
             }
+
             td {
                 align-self: stretch;
                 text-align: left;

@@ -1,0 +1,275 @@
+export const meta = { title: 'JavaScript Moderno (ES6)', order: 2, chapter: 1 }
+
+## Variáveis, Funções e Strings
+
+Chegamos ao coração deste módulo. No Módulo 0, demos os primeiros passos em JavaScript: criamos uma função com `function`, respondemos a um clique com `onclick` e alteramos o texto de um elemento com `getElementById`.
+
+A partir de 2015, o JavaScript ganhou uma grande atualização, conhecida como **ES6** (ou ES2015) e as versões seguintes (que chamamos genericamente de **ES6+** ou "JavaScript moderno"). Essa atualização trouxe formas mais limpas e seguras de escrever código. E aqui está o ponto mais importante: **o React, que veremos no Módulo 2, usa esses recursos modernos o tempo todo**. Cada conceito deste capítulo vai reaparecer lá na frente. Dominá-los agora é o que vai tornar o React fácil de entender.
+
+### `let` e `const` no lugar de `var`
+
+Na introdução, abordamos 3 formas diferentes de declarar variáveis. Mas por quê?
+Antigamente, as variáveis em JavaScript eram declaradas com `var`. Hoje, usamos `let` e `const`, que são mais seguros e previsíveis.
+
+- `const` (de *constante*): para valores que **não serão reatribuídos**. É a escolha padrão.
+- `let`: para valores que **vão mudar** ao longo do código.
+
+```javascript
+const nome = "Maria";   // não vai mudar
+let contador = 0;       // vai mudar depois
+
+contador = contador + 1; // permitido, pois é let
+
+// nome = "João";       // ERRO: não se pode reatribuir uma const
+```
+
+> Uma boa prática: **comece sempre com `const`**. Só troque para `let` se perceber que realmente precisa reatribuir o valor. Isso evita mudanças acidentais e deixa claro, só de bater o olho, o que pode ou não mudar.
+
+No Módulo 2, você vai notar que o React usa `const` em quase tudo, inclusive para declarar componentes e estados.
+
+### Arrow Functions (funções de seta, funções anônimas)
+
+No Módulo 0, criamos funções assim:
+
+```javascript
+function somar(a, b) {
+  return a + b;
+}
+```
+
+O JavaScript moderno oferece uma forma mais curta de escrever funções, chamada **arrow function** (função de seta), usando o símbolo `=>`:
+
+```javascript
+const somar = (a, b) => {
+  return a + b;
+};
+```
+
+Quando a função só tem uma linha que retorna um valor, podemos encurtar ainda mais, removendo as chaves e a palavra `return`:
+
+```javascript
+const somar = (a, b) => a + b;
+
+const saudacao = (nome) => "Olá, " + nome;
+```
+
+As duas formas (`function` e arrow function) funcionam. A arrow function é apenas mais compacta e, por isso\*, virou o padrão no ecossistema moderno. No React, praticamente todas as funções que respondem a cliques e eventos são escritas como arrow functions, então vale a pena se acostumar com essa sintaxe desde já.
+
+> *: "Por isso" é de grosso modo. Caso queira estudar mais profundamente, um grande motivo adicional é que a *arrow function* é uma declaração de uma *função anônima*. Isso é, ela existe como um "objeto dinâmico", e não precisa ter nome. É um "valor" que atribuímos a uma variável, em vez de ser um símbolo. Por isso, é frequente que criamos funções *ad-hoc* (lit. "para isso", algo que você cria para um uso específico) por *arrow functions.*
+
+### Template Literals (strings com crase)
+
+No Módulo 0, juntávamos textos e variáveis usando o sinal de `+`:
+
+```javascript
+const nome = "Ana";
+const mensagem = "Bem-vinda, " + nome + "!";
+```
+
+Isso funciona, mas fica confuso quando há muitas partes. Os **template literals** resolvem isso. Em vez de aspas, usamos **crase** (`` ` ``) e inserimos variáveis diretamente no texto com `${ }`:
+
+```javascript
+const nome = "Ana";
+const mensagem = `Bem-vinda, ${nome}!`;
+```
+
+Muito mais limpo e legível. Dentro de `${ }` podemos colocar qualquer expressão, inclusive contas:
+
+```javascript
+const preco = 50;
+const quantidade = 3;
+console.log(`Total: R$ ${preco * quantidade}`);
+// Total: R$ 150
+```
+
+Os template literals também permitem escrever texto em várias linhas sem complicação. Se você reparar no uso futuro com tecnologias de Node.js e Firebase, verá template literals sendo usados em várias mensagens, como ``console.log(`Usuário ID ${id} removido`)``.
+
+### Operador Ternário
+
+É uma forma curta de escrever um `if/else` que resulta em um valor. A estrutura é:
+
+```
+condição ? valor_se_verdadeiro : valor_se_falso
+```
+
+Exemplo:
+
+```javascript
+const idade = 20;
+const status = idade >= 18 ? "maior de idade" : "menor de idade";
+
+console.log(status); // "maior de idade"
+```
+
+Lê-se assim: "a idade é maior ou igual a 18? Se sim, 'maior de idade'; se não, 'menor de idade'". Guarde bem este operador: no Módulo 2, ele é a principal convenção utilizada com React para decidir o que mostrar na tela (a chamada "renderização condicional").
+
+---
+
+## Trabalhando com Objetos e Arrays
+
+Até agora, nossas variáveis guardavam valores simples: um número, um texto. Mas as aplicações reais lidam com dados estruturados, como uma lista de produtos, os dados de um usuário ou um conjunto de tarefas. Para isso, o JavaScript oferece dois tipos fundamentais: **objetos** e **arrays**. Trabalhamos com o básico deles no Módulo 0, mas não elaboramos o porquê que motiva o uso deles.
+
+Este capítulo é especialmente importante porque, no Módulo 2, o React vive de transformar listas de dados em elementos na tela. E nos módulos extras de banco de dados, cada linha de uma tabela vira exatamente um objeto como os que veremos aqui.
+
+### Objetos
+
+Um objeto agrupa informações relacionadas em pares de **chave: valor**. Pense nele como uma ficha de cadastro:
+
+```javascript
+const usuario = {
+  nome: "Gabriel",
+  idade: 29,
+  cidade: "Curitiba"
+};
+```
+
+Para acessar um valor, usamos o ponto seguido do nome da chave:
+
+```javascript
+console.log(usuario.nome);   // "Gabriel"
+console.log(usuario.cidade); // "Curitiba"
+```
+
+Se isso lembrou a estrutura de uma tabela de banco de dados, a intuição está correta: no módulo de banco de dados, uma linha com `nome`, `idade` e `cidade` é entregue ao JavaScript exatamente como um objeto assim.
+
+### Arrays
+
+Um array é uma **lista ordenada** de valores. Criamos com colchetes `[ ]`:
+
+```javascript
+const frutas = ["maçã", "banana", "laranja"];
+```
+
+Acessamos cada item pela sua posição (o **índice**), que começa em **0**:
+
+```javascript
+console.log(frutas[0]); // "maçã"
+console.log(frutas[1]); // "banana"
+```
+
+O mais comum é um array de objetos, ou seja, uma lista de fichas:
+
+```javascript
+const usuarios = [
+  { id: 1, nome: "Gabriel", cidade: "Curitiba" },
+  { id: 2, nome: "Ana", cidade: "São Paulo" },
+  { id: 3, nome: "Rafael", cidade: "Londrina" }
+];
+```
+
+Essa é a forma exata como os dados chegam quando buscamos informações de uma API ou de um banco de dados. Guarde essa imagem.
+
+### Desestruturação (Destructuring)
+
+A **desestruturação** é uma forma elegante de extrair valores de um objeto (ou array) para variáveis separadas. Em vez de escrever `usuario.nome` várias vezes, extraímos de uma vez só:
+
+```javascript
+const usuario = { nome: "Gabriel", idade: 29, cidade: "Curitiba" };
+
+// Sem desestruturação:
+const nome = usuario.nome;
+const idade = usuario.idade;
+
+// Com desestruturação (muito mais limpo):
+const { nome, idade, cidade } = usuario;
+
+console.log(nome);  // "Gabriel"
+console.log(idade); // 29
+```
+
+Também funciona com arrays, usando colchetes:
+
+```javascript
+const cores = ["vermelho", "verde", "azul"];
+const [primeira, segunda] = cores;
+
+console.log(primeira); // "vermelho"
+console.log(segunda);  // "verde"
+```
+
+Esse recurso é central no React. No Módulo 2, você verá componentes recebendo dados "desestruturados" diretamente (`function Card({ nome, cargo })`) e o `useState` sempre devolve um array que é desestruturado: `const [contador, setContador] = useState(0)`. É exatamente a sintaxe que acabamos de aprender.
+
+### Operador Spread (espalhamento)
+
+O operador spread, escrito com três pontos (`...`), serve para "espalhar" o conteúdo de um objeto ou array dentro de outro. É muito usado para **copiar e adicionar** dados sem alterar o original.
+
+Com arrays:
+
+```javascript
+const numeros = [1, 2, 3];
+const maisNumeros = [...numeros, 4, 5];
+
+console.log(maisNumeros); // [1, 2, 3, 4, 5]
+```
+
+Com objetos:
+
+```javascript
+const usuario = { nome: "Ana", cidade: "São Paulo" };
+const usuarioAtualizado = { ...usuario, cidade: "Campinas" };
+
+console.log(usuarioAtualizado);
+// { nome: "Ana", cidade: "Campinas" }
+```
+
+No exemplo acima, copiamos todas as propriedades de `usuario` e só mudamos a `cidade`. Essa técnica de "copiar preservando o resto" é exatamente a que o React usa para atualizar formulários com vários campos, como você verá no Módulo 2.
+
+### O método `.map()` – transformando listas
+
+De todos os recursos deste módulo, `.map()` talvez seja o mais importante para o React. Ele percorre um array e **cria um novo array**, transformando cada item.
+
+A ideia: "para cada item da lista, faça algo e devolva um novo valor".
+
+```javascript
+const numeros = [1, 2, 3, 4];
+
+// Para cada número, devolve o dobro dele
+const dobrados = numeros.map((numero) => numero * 2);
+
+console.log(dobrados); // [2, 4, 6, 8]
+```
+
+O `.map()` recebe uma função (aqui, uma arrow function) que é executada para cada item. O que essa função retorna vira um item do novo array.
+
+Com um array de objetos, fica ainda mais útil:
+
+```javascript
+const usuarios = [
+  { id: 1, nome: "Gabriel" },
+  { id: 2, nome: "Ana" }
+];
+
+// Cria uma lista apenas com os nomes
+const nomes = usuarios.map((usuario) => usuario.nome);
+
+console.log(nomes); // ["Gabriel", "Ana"]
+```
+
+No Módulo 2, o React usa `.map()` para transformar uma lista de dados em uma lista de elementos visuais na tela, por exemplo, transformar um array de tarefas em vários itens `<li>`. Quando chegarmos lá, essa ideia já será familiar.
+
+### Outros métodos úteis: `.filter()` e `.forEach()`
+
+Vale conhecer mais dois métodos que seguem a mesma ideia do `.map()`:
+
+O `.filter()` cria um novo array apenas com os itens que passam em um teste:
+
+```javascript
+const numeros = [1, 2, 3, 4, 5, 6];
+
+// Mantém apenas os números pares
+const pares = numeros.filter((numero) => numero % 2 === 0);
+
+console.log(pares); // [2, 4, 6]
+```
+
+O `.forEach()` apenas percorre o array executando uma ação para cada item (sem criar um novo array). É útil, por exemplo, para exibir cada item:
+
+```javascript
+const frutas = ["maçã", "banana"];
+
+frutas.forEach((fruta) => {
+  console.log(fruta);
+});
+// maçã
+// banana
+```

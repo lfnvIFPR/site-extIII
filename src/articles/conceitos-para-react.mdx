@@ -1,0 +1,156 @@
+export const meta = { title: 'Conceitos pré-React', order: 4, chapter: 1 }
+
+## Assincronismo -- Promises, async/await e Fetch
+
+Até agora, nosso código era **síncrono**: cada linha executa, termina, e só então a próxima começa. Mas algumas tarefas levam tempo e não podem travar a página enquanto esperam, por exemplo, buscar dados de um servidor pela internet. Isso envolve o **assincronismo**, um dos temas mais importantes do JavaScript moderno.
+
+Este capítulo é fundamental porque, no Módulo 2, o React busca dados de APIs usando exatamente as ferramentas que veremos aqui (`async/await` e `fetch`). E nos módulos extras de banco de dados, toda a comunicação com o Node.js também é assíncrona.
+
+### O problema: tarefas que demoram
+
+Imagine que você pede uma informação a um servidor na internet. Essa resposta pode levar alguns décimos de segundo. Se o JavaScript simplesmente "parasse" e ficasse esperando, a página inteira congelaria. Por isso, essas tarefas são tratadas de forma **assíncrona**: o código dispara o pedido, continua funcionando, e lida com a resposta quando ela chegar.
+
+### Promises
+
+Uma **Promise** (lit. promessa) é um objeto que representa um valor que ainda não existe, mas que vai existir no futuro, ou seja, o resultado de uma tarefa assíncrona. É como um comprovante de pedido: você ainda não tem o produto, mas tem a promessa de que ele chegará (ou de que algo deu errado).
+
+Uma Promise pode terminar de duas formas:
+
+- **Resolvida (sucesso)**: a tarefa deu certo e temos o resultado.
+- **Rejeitada (erro)**: algo falhou (a rede caiu, o servidor deu erro).
+
+Você não precisa criar Promises manualmente agora. O importante é entender que muitas funções do JavaScript **devolvem** uma Promise, e precisamos saber como esperar pelo resultado delas.
+
+### `async` e `await`
+
+A forma moderna e mais legível de trabalhar com Promises é usando as palavras-chave `async` e `await`.
+
+- `async`: colocada antes de uma função, indica que ela trabalha com tarefas assíncronas.
+- `await`: colocada antes de uma chamada assíncrona, faz o código **esperar** o resultado antes de seguir para a próxima linha, sem travar o restante da página.
+
+```javascript
+async function buscarDados() {
+  console.log("Iniciando a busca...");
+
+  const resultado = await algumaTarefaDemorada();
+
+  console.log("Resultado chegou:", resultado);
+}
+```
+
+Lê-se de forma quase natural: "espere (`await`) a tarefa terminar, e só então guarde o resultado e continue". Note que `await` só pode ser usado dentro de uma função marcada como `async`.
+
+### Tratando erros com try/catch
+
+Como tarefas assíncronas podem falhar, precisamos de uma forma de capturar erros. Para isso usamos o bloco `try/catch`:
+
+- O que está dentro do `try` é tentado.
+- Se algo der errado, o controle pula para o `catch`, onde tratamos o erro sem quebrar a aplicação.
+
+```javascript
+async function buscarDados() {
+  try {
+    const resultado = await algumaTarefaDemorada();
+    console.log("Deu certo:", resultado);
+  } catch (erro) {
+    console.error("Algo deu errado:", erro);
+  }
+}
+```
+
+Esse padrão `try/catch` é o mesmo usado nos módulos de Node.js e Firebase para proteger o acesso ao banco de dados.
+
+### Buscando dados da internet com `fetch`
+
+O `fetch` é uma função nativa do navegador que busca dados de um endereço na internet (uma **API**). Uma API é, de forma simples, um servidor que fornece dados, geralmente no formato **JSON**, que é basicamente a estrutura de objetos e arrays que aprendemos no Capítulo 5.
+
+Veja um exemplo completo que busca uma lista de usuários de uma API pública de testes:
+
+```javascript
+async function buscarUsuarios() {
+  try {
+    // 1. Faz o pedido e espera a resposta chegar
+    const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
+
+    // 2. Converte a resposta para o formato JSON (objetos/arrays)
+    const usuarios = await resposta.json();
+
+    // 3. Agora temos um array de objetos, que podemos usar
+    console.log(usuarios);
+
+    // Usando o .map() do Capítulo 5 para pegar só os nomes
+    const nomes = usuarios.map((usuario) => usuario.name);
+    console.log(nomes);
+  } catch (erro) {
+    console.error("Erro ao buscar usuários:", erro);
+  }
+}
+
+buscarUsuarios();
+```
+O programa segue essa lógica:
+
+1. `await fetch(...)` dispara o pedido e espera a resposta do servidor.
+2. `await resposta.json()` transforma essa resposta em dados JavaScript utilizáveis. Nesse caso em específico, é um array de objetos.
+3. A partir daí, usamos os recursos que já conhecemos, como o `.map()`, para trabalhar com esses dados.
+
+Quando você chegar no Módulo 2, vai reconhecer este exato código dentro do React: ele busca dados de uma API com `fetch` e `async/await`, trata erros com `try/catch` e exibe os resultados com `.map()`. Tudo o que você aprendeu aqui será reutilizado diretamente.
+
+## Módulos, Node.js e Linter
+
+Conforme um projeto cresce, não faz sentido colocar todo o JavaScript em um único arquivo gigante. Precisamos de formas de **organizar o código em pedaços reutilizáveis** e de **ferramentas que nos ajudem a manter a qualidade**. Este último capítulo apresenta os conceitos e ferramentas que preparam o ambiente para o Módulo 2, afinal, um projeto React é, na sua base, um projeto organizado exatamente com essas ideias.
+
+### Módulos: dividir para organizar
+
+Um **módulo** é simplesmente um arquivo JavaScript que disponibiliza (exporta) partes do seu código para que outros arquivos possam usá-las (importar). Isso permite separar responsabilidades: um arquivo cuida das contas, outro cuida da tela, outro dos dados.
+
+Usamos duas palavras-chave: `export` para disponibilizar e `import` para usar.
+
+Crie um arquivo `calculos.js` que exporta funções:
+
+```javascript
+// calculos.js
+export function somar(a, b) {
+  return a + b;
+}
+
+export function subtrair(a, b) {
+  return a - b;
+}
+```
+
+Um arquivo externo `app.js` importa e usa o módulo `calculos.js`:
+
+```javascript
+// app.js
+import { somar, subtrair } from "./calculos.js";
+
+console.log(somar(2, 3));     // 5
+console.log(subtrair(10, 4)); // 6
+```
+
+Também existe o **export default**, usado quando um arquivo exporta uma coisa principal:
+
+```javascript
+// saudacao.js
+export default function saudacao(nome) {
+  return `Olá, ${nome}!`;
+}
+```
+
+Quando exportamos dessa forma, podemos importar com qualquer nome.
+
+```javascript
+// app.js
+import saudacao from "./saudacao.js";
+
+console.log(saudacao("Ana")); // Olá, Ana!
+```
+
+> **Observação:** para usar `import`/`export` diretamente no navegador, a tag `<script>` no HTML precisa ter o atributo `type="module"`:
+> ```html
+> <script type="module" src="app.js"></script>
+> ```
+
+Se você reparou, os módulos extras de Node.js e Firebase usam `import` e `export` o tempo todo (como `import { app } from "./firebase"`). E no Módulo 2, cada componente React fica em seu próprio arquivo e é importado quando necessário, exatamente este mecanismo. Note que o React usa `export default` para componentes e `import` para reutilizá-los, como em `import CardPerfil from './CardPerfil'`.
+

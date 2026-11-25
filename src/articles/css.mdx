@@ -1,0 +1,238 @@
+export const meta = { title: 'CSS Intermediário', order: 1, chapter: 1 }
+
+Um bom conhecimento de CSS facilita a compreensão de como que seu site está estilizado, estruturado ou organizado. Vamos desenvolver melhor o nosso entendimento de estilização.
+
+## Seletores, Variáveis e Responsividade
+
+No Módulo 0, aprendemos a aplicar CSS de três formas (inline, interno e externo), a usar classes com o ponto (`.titulo`) e a conhecer propriedades importantes como `color`, `background-color`, `margin`, `padding` e `display`. Também vimos o Flexbox para organizar elementos em uma linha ou coluna.
+
+Agora vamos ampliar esse vocabulário de CSS com recursos que deixam o código mais poderoso e organizado.
+
+### Seletores além da classe
+
+Até agora usamos o seletor de elemento (`h1`) e o seletor de classe (`.titulo`). Existem outros seletores muito úteis:
+
+```css
+/* Seletor de ID: aplica a um único elemento com id="menu" */
+#menu {
+  background-color: black;
+}
+
+/* Seletor descendente: parágrafos que estão dentro de uma section */
+section p {
+  color: gray;
+}
+
+/* descendente direto, apenas o filho direto. um figure > * > img não aplica */
+figure > img {
+  width: 40%;
+}
+
+/* Vários seletores de uma vez, separados por vírgula */
+h1, h2, h3 {
+  font-family: sans-serif;
+}
+```
+Um estilo muito legal é o seletor aninhado: Utilizando o operador &, você pode criar estilos dentro de estilos vigentes apenas para elementos relacionados. É mais avançado, porém esse site utiliza muito desse estilo!
+
+```css
+.formulario {
+  background-color: white;
+
+  /* 
+  O botão descendente do formulário.
+  Aqui, o '&' substitui o '.formulario' do seletor acima!
+  */
+  & button {
+    background-color: grey;
+    color: black;
+  }
+}
+```
+
+Estilos aninhados desse jeito funcionam com pseudo-seletores, classes, queries, as coisas descritas logo abaixo. É um modelo muito didático!
+
+### Pseudo-classes: reagindo a estados
+
+Pseudo-classes permitem aplicar estilo quando o elemento está em um determinado estado. A mais comum é `:hover`, que aplica o estilo quando o mouse está sobre o elemento:
+
+```css
+button {
+  background-color: blue;
+  color: white;
+}
+
+/* Quando o mouse passa por cima do botão */
+button:hover {
+  background-color: darkblue;
+}
+```
+
+Isso cria aquele efeito de "o botão muda de cor quando você aponta para ele", sem precisar de nenhum JavaScript.
+
+### Variáveis CSS (custom properties)
+
+Imagine que a cor principal do seu site é um tom de azul usado em dezenas de lugares. Se um dia você quiser trocar essa cor, teria que alterar cada ocorrência manualmente. As **variáveis CSS** resolvem isso: você define a cor uma vez e reutiliza em todo lugar.
+
+Declaramos as variáveis dentro de `:root` (que representa a raiz do documento) e as usamos com a função `var()`:
+
+```css
+:root {
+  --cor-principal: #2563eb;
+  --cor-texto: #1f2937;
+  --espacamento: 16px;
+}
+
+h1 {
+  color: var(--cor-principal);
+}
+
+p {
+  color: var(--cor-texto);
+  margin-bottom: var(--espacamento);
+}
+```
+
+Agora, se você mudar `--cor-principal` em um único lugar, todo o site é atualizado. Esse conceito de "definir um valor em um lugar e reutilizar" vai reaparecer de forma parecida quando falarmos de variáveis em JavaScript e de props no React.
+
+### Unidades relativas
+
+No Módulo 0, usamos pixels (`px`), que é uma medida fixa. Existem unidades relativas, que se adaptam ao contexto e são essenciais para sites que funcionam bem em telas diferentes:
+
+- `%`: porcentagem em relação ao elemento pai.
+- `rem`: relativo ao tamanho da fonte base da página (geralmente 16px). `1.5rem` = 24px.
+- `vw` e `vh`: relativos à largura (`viewport width`) e altura (`viewport height`) da tela.
+
+Existem mais unidades, sempre visite a documentação [MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/CSS/Reference) para mais informações.
+
+```css
+.container {
+  width: 80%;        /* 80% da largura do elemento pai */
+  font-size: 1.2rem; /* proporcional à fonte base */
+}
+```
+
+### Responsividade com Media Queries
+
+Um site responsivo é aquele que se adapta ao tamanho da tela, seja celular, tablet ou computador. Para isso, usamos as **media queries**, que aplicam estilos diferentes dependendo da largura da tela.
+
+```css
+/* Estilo padrão (vale para todas as telas) */
+.menu {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Quando a tela tiver no máximo 600px de largura (celular) */
+@media (max-width: 600px) {
+  .menu {
+    flex-direction: column;
+  }
+}
+```
+
+No exemplo acima, o menu fica em linha no computador e vira uma coluna no celular. Repare que estamos reaproveitando o `flex-direction` que aprendemos no Módulo 0, e a media query apenas muda o valor em telas pequenas.
+
+> **Dica:** para que a responsividade funcione bem no celular, o HTML precisa conter a seguinte tag dentro do `<head>` (ela já costuma vir nos modelos de projeto):
+> ```html
+> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+> ```
+
+---
+
+## CSS Grid – Posicionando em Duas Dimensões
+
+No Módulo 0, aprendemos o Flexbox, que organiza elementos em **uma dimensão**: ou em linha, ou em coluna. O Flexbox é perfeito para alinhar os itens de um menu ou centralizar um conteúdo. Mas quando precisamos organizar a página em **duas dimensões ao mesmo tempo**, com linhas e colunas, como uma tabela ou um layout de cards, a ferramenta ideal é o **CSS Grid**.
+
+Pense assim: o Flexbox organiza itens ao longo de uma fila; o Grid organiza itens dentro de uma grade, com linhas e colunas.
+
+### Ativando o Grid
+
+Assim como o Flexbox usava `display: flex`, o Grid é ativado com `display: grid` no elemento pai (o contêiner). A grande novidade é a propriedade `grid-template-columns`, que define quantas colunas a grade terá e qual o tamanho de cada uma.
+
+```css
+.galeria {
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  gap: 16px;
+}
+```
+
+```html
+<div class="galeria">
+  <div class="card">Item 1</div>
+  <div class="card">Item 2</div>
+  <div class="card">Item 3</div>
+  <div class="card">Item 4</div>
+  <div class="card">Item 5</div>
+  <div class="card">Item 6</div>
+</div>
+```
+
+Aqui definimos três colunas de 200px cada. Os seis itens se organizam automaticamente em duas linhas de três colunas. A propriedade `gap`, que já conhecíamos do Flexbox, continua funcionando para criar o espaço entre os itens.
+
+### A unidade `fr` (fração)
+
+Definir tamanhos fixos em pixels nem sempre é ideal. O Grid introduz uma unidade especial: o `fr`, que significa "fração" do espaço disponível. Ela distribui o espaço proporcionalmente.
+
+```css
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+```
+
+Isso cria três colunas de tamanho igual, que juntas ocupam toda a largura disponível. Se a tela crescer ou diminuir, as colunas se ajustam sozinhas. É como dizer "divida o espaço em três partes iguais".
+
+Também podemos misturar proporções:
+
+```css
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* a segunda coluna é o dobro da primeira */
+}
+```
+
+### Definindo linhas
+
+Da mesma forma que definimos colunas, podemos definir a altura das linhas com `grid-template-rows`:
+
+```css
+.painel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100px 100px;
+  gap: 10px;
+}
+```
+
+### Um layout clássico de página
+
+O Grid é excelente para montar a estrutura geral de uma página (cabeçalho, conteúdo, rodapé). Combinando com as tags semânticas do Módulo 0:
+
+```css
+.pagina {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* menu estreito, conteúdo largo */
+  gap: 20px;
+}
+```
+
+```html
+<div class="pagina">
+  <nav>Menu lateral</nav>
+  <main>Conteúdo principal</main>
+</div>
+```
+
+### Flexbox ou Grid? Quando usar cada um
+
+Não é uma escolha de "um ou outro", pois os dois trabalham juntos no dia a dia:
+
+- **Flexbox**: quando você organiza itens em uma única direção (uma linha de botões, um menu horizontal, centralizar algo).
+- **Grid**: quando você organiza em linhas e colunas ao mesmo tempo (galerias de imagens, layouts de página, grades de cards).
+
+Uma prática comum é usar o Grid para a estrutura geral da página e o Flexbox para alinhar os detalhes dentro de cada bloco.
+
+---

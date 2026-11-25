@@ -1,0 +1,71 @@
+export const meta = { title: 'Node.js', order: 5, chapter: 1 }
+
+### JavaScript fora do navegador
+
+Até aqui, todo o nosso JavaScript rodou dentro do navegador. O **Node.js** é um programa que permite executar JavaScript **fora do navegador**, diretamente no seu computador. Ele é o que torna possível criar servidores, ferramentas de linha de comando e, importante para nós, rodar as ferramentas modernas de desenvolvimento front-end.
+
+Para instalar, acesse o site oficial `nodejs.org` e baixe a versão **LTS** (Long Term Support), que é a mais estável. Após instalar, você pode verificar no terminal (como vimos com o Git no Módulo 0):
+
+```bash
+node -v
+npm -v
+```
+
+Se aparecerem os números das versões, está tudo pronto.
+
+### npm: o gerenciador de pacotes
+
+Junto com o Node.js vem o **npm** (Node Package Manager). Ele é o gerenciador de pacotes: serve para instalar bibliotecas (códigos prontos feitos por outras pessoas) e organizar o projeto.
+
+O primeiro passo em um novo projeto é inicializá-lo, o que cria um arquivo chamado `package.json`:
+
+```bash
+npm init -y
+```
+
+O `package.json` é o "documento de identidade" do projeto: ele guarda o nome, a versão e, principalmente, a lista de **dependências** (as bibliotecas que o projeto usa).
+
+Para instalar uma biblioteca, usamos `npm install`:
+
+```bash
+npm install nome-da-biblioteca
+```
+
+Isso baixa a biblioteca para uma pasta chamada `node_modules` e a registra no `package.json`. No Módulo 2, você usará esse mesmo comando para instalar o React.
+
+### Ferramentas de build: uma palavra sobre o Vite
+
+No Módulo 2, você verá que projetos React costumam ser criados com uma ferramenta chamada **Vite**. Sem entrar em detalhes agora, basta saber o papel dela: o Vite organiza o projeto, roda um servidor local para você ver suas mudanças em tempo real e transforma o código moderno (como o JSX do React) em algo que o navegador entende. Ele usa o Node.js e o npm que acabamos de instalar. Mencionamos isso aqui apenas para que o nome não seja uma surpresa quando aparecer.
+
+### Linter: um revisor automático do seu código
+
+Um **linter** é uma ferramenta que analisa seu código e aponta problemas automaticamente: erros de sintaxe, variáveis declaradas mas nunca usadas, falhas de padronização e descuidos comuns. É como um corretor ortográfico, mas para programação.
+
+A ferramenta mais usada no ecossistema JavaScript é o **ESLint**. Ele ajuda de duas formas:
+
+- **Evita erros**: aponta problemas antes mesmo de você rodar o código.
+- **Padroniza o estilo**: garante que todo o time escreva de forma consistente (por exemplo, sempre usar `const`, sempre o mesmo tipo de aspas).
+
+Na prática, o linter costuma vir integrado ao VS Code (que instalamos no Módulo 0) e sublinha os problemas diretamente no editor enquanto você digita. Projetos React criados com o Vite já vêm com o ESLint configurado, então você verá essas dicas aparecendo naturalmente.
+
+### Por que isso tudo importa?
+
+Pode parecer muita ferramenta de uma vez, mas a ideia central é simples: **à medida que as aplicações crescem, precisamos de organização e de ajuda automática**. Os módulos organizam o código em arquivos com responsabilidades claras; o Node.js e o npm fornecem o ambiente e as bibliotecas; o linter mantém a qualidade. Juntos, eles formam a base de qualquer projeto profissional moderno, inclusive o projeto React que você construirá no próximo módulo.
+
+---
+
+## Conclusão
+
+Neste módulo, demos o salto do iniciante para o intermediário. Partindo do HTML, CSS e JavaScript básicos do Módulo 0, nós:
+
+- Aprofundamos o HTML com formulários e seus campos.
+- Expandimos o CSS com novos seletores, pseudo-classes, variáveis e responsividade com media queries.
+- Dominamos o CSS Grid para layouts em duas dimensões, complementando o Flexbox.
+- Mergulhamos no JavaScript moderno: `const`/`let`, arrow functions, template literals, operador ternário, objetos, arrays, desestruturação, spread e, principalmente, o `.map()`.
+- Entendemos o DOM e passamos a tratar eventos de forma organizada com `addEventListener`.
+- Compreendemos o assincronismo com Promises, `async/await` e a busca de dados com `fetch`.
+- Organizamos o código em módulos e conhecemos o ambiente de ferramentas (Node.js, npm, linter).
+
+Cada um desses tópicos foi escolhido com um objetivo claro: ser exatamente o que você precisa saber para encarar o **Módulo 2 (React)** com confiança. Quando chegar lá, você vai reconhecer os componentes como funções que retornam estrutura visual, as props como objetos desestruturados, o estado sendo lido com desestruturação de array, as listas sendo montadas com `.map()`, os formulários sendo tratados com `preventDefault` e os dados sendo buscados com `async/await` e `fetch`.
+
+Nada disso será novo, será apenas a aplicação, dentro do React, de tudo o que você construiu aqui. Bons estudos, e nos vemos no próximo módulo!

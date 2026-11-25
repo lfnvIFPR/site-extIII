@@ -1,0 +1,99 @@
+export const meta = { title: 'Manipulando a Página com o DOM e Eventos', order: 3, chapter: 1 }
+
+No Módulo 0, tivemos o primeiro contato com a manipulação da página: usamos `document.getElementById("mensagem").innerText = "..."` para trocar um texto, e respondemos a cliques com o atributo `onclick` escrito direto no HTML.
+
+Neste capítulo, vamos entender melhor o que é o **DOM** e aprender uma forma mais organizada e profissional de lidar com eventos, separando o JavaScript do HTML. Esse entendimento é a base para compreender, no Módulo 2, por que o React foi criado e qual problema ele resolve.
+
+### O que é o DOM?
+
+Quando o navegador carrega uma página HTML, ele cria uma representação dela na memória chamada **DOM** (Document Object Model, ou Modelo de Objetos do Documento). O DOM é como uma árvore que representa todos os elementos da página, e o JavaScript pode ler e modificar essa árvore em tempo real.
+
+Em outras palavras: o HTML descreve a página uma vez; o DOM é a página "viva", que o JavaScript consegue alterar depois de carregada.
+
+### Selecionando elementos
+
+No Módulo 0, usamos `getElementById`. O JavaScript moderno oferece um método mais flexível: o `querySelector`, que seleciona um elemento usando a mesma sintaxe dos seletores CSS que vimos no Capítulo 2.
+
+```javascript
+// Seleciona pelo id (equivale a getElementById)
+const titulo = document.querySelector("#titulo");
+
+// Seleciona pela classe
+const botao = document.querySelector(".botao-enviar");
+
+// Seleciona pela tag
+const primeiroParagrafo = document.querySelector("p");
+```
+
+Para selecionar **vários** elementos de uma vez, usamos `querySelectorAll`, que devolve uma lista (parecida com um array):
+
+```javascript
+const todosOsBotoes = document.querySelectorAll("button");
+```
+
+### Alterando conteúdo e estilo
+
+Com um elemento selecionado, podemos alterar seu conteúdo e sua aparência:
+
+```javascript
+const titulo = document.querySelector("#titulo");
+
+// Alterando o texto (como fizemos no Módulo 0)
+titulo.innerText = "Novo título";
+
+// Alterando o estilo
+titulo.style.color = "blue";
+titulo.style.fontSize = "32px";
+```
+
+### Eventos com `addEventListener`
+
+No Módulo 0, usamos `onclick` escrito dentro do HTML. Isso funciona, mas mistura o comportamento (JavaScript) com a estrutura (HTML). A forma recomendada é separar as duas coisas, deixando o HTML limpo e colocando a lógica no arquivo JavaScript.
+
+Para isso, usamos o método `addEventListener`, que "escuta" um evento em um elemento e executa uma função quando ele acontece.
+
+```html
+<button id="meu-botao">Clique aqui</button>
+<h1 id="mensagem">Texto antigo</h1>
+```
+
+```javascript
+const botao = document.querySelector("#meu-botao");
+const mensagem = document.querySelector("#mensagem");
+
+botao.addEventListener("click", () => {
+  mensagem.innerText = "Texto trocado!";
+});
+```
+
+Repare que passamos para o `addEventListener` duas coisas: o nome do evento (`"click"`) e uma arrow function que será executada quando o clique acontecer. Compare este exemplo com o do Módulo 0: fazemos a mesma coisa (trocar o texto ao clicar), mas agora o HTML não sabe nada sobre JavaScript, pois as responsabilidades estão separadas.
+
+Além de `"click"`, existem muitos eventos: `"input"` (quando o usuário digita em um campo), `"submit"` (quando um formulário é enviado), `"mouseover"` (quando o mouse passa por cima), entre outros.
+
+### Tratando o envio de um formulário
+
+Vamos juntar o formulário do Capítulo 1 com o que aprendemos aqui. No Módulo 0, vimos que o botão `submit` recarrega a página por padrão. Para impedir isso e tratar os dados com JavaScript, usamos `event.preventDefault()`.
+
+```html
+<form id="form-cadastro">
+  <input type="text" id="nome" placeholder="Digite seu nome">
+  <button type="submit">Cadastrar</button>
+</form>
+```
+
+```javascript
+const form = document.querySelector("#form-cadastro");
+const campoNome = document.querySelector("#nome");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); // impede o recarregamento da página
+
+  const nomeDigitado = campoNome.value; // .value lê o que foi digitado
+  console.log(`Nome cadastrado: ${nomeDigitado}`);
+});
+```
+
+Dois pontos importantes para o futuro:
+
+- `event.preventDefault()` é exatamente a mesma técnica que o React usa ao tratar formulários no Módulo 2.
+- `.value` é a forma de ler o que o usuário digitou em um campo. No React, isso aparecerá como `e.target.value`.

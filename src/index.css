@@ -38,11 +38,17 @@
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
     font-size: 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {  
+    scroll-behavior: auto;
   }
 }
 

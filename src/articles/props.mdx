@@ -1,0 +1,131 @@
+export const meta = { title: 'Componentes e Props', order: 0, chapter: 2 }
+
+Seja bem-vindo ao módulo principal sobre React! Se nos módulos anteriores focamos em persistência de dados, CRUD e backend com Node.js, agora vamos cruzar a fronteira para o desenvolvimento frontend moderno.
+
+Neste primeiro capítulo, vamos desvendar o que é o React, por que ele revolucionou a criação de interfaces web e qual é o conceito central que sustenta toda a sua arquitetura: os componentes.
+
+### O que é o React e por que ele surgiu?
+
+Criado e mantido pelo Facebook (Meta), o React é uma biblioteca JavaScript declarativa e eficiente para a construção de interfaces de usuário (User Interfaces ou UIs).
+
+Antigamente, o desenvolvimento web tradicional dependia de manipulação direta do DOM (Document Object Model) o que significava escrever códigos imperativos dizendo ao navegador exatamente o que alterar, esconder ou adicionar passo a passo (`document.getElementById().innerHTML = ...`). Em aplicações grandes, esse modelo tornava o código confuso, difícil de manter e propenso a bugs de sincronização de estado.
+
+O React mudou essa lógica ao introduzir uma abordagem declarativa:
+
+- Você descreve como a interface deve se parecer com base em um determinado estado de dados.
+- Quando os dados mudam, o próprio React calcula de forma inteligente e eficiente o que precisa ser atualizado na tela, alterando apenas os elementos necessários através do seu Virtual DOM.
+
+### O Conceito Fundamental: Componentes
+
+Se você olhar para qualquer site moderno (como o YouTube, o GitHub ou um painel de controle), perceberá que a tela é composta por repetições de elementos visuais: barras de navegação, cards de produtos, botões, avatares e listas.
+
+O React propõe que você divida a sua interface inteira em pequenos blocos independentes, reutilizáveis e isolados chamados Componentes.
+
+- **O que é um componente?** Em termos práticos, um componente React é uma função em JavaScript que retorna um pedaço de estrutura visual (parecido com HTML).
+- **Reutilização:** Um componente de "Botão" ou "Card de Usuário" pode ser escrito uma única vez e reutilizado dezenas de vezes em diferentes páginas da aplicação, recebendo dados diferentes através de propriedades.
+
+### JSX
+
+Quando você olha para o código de um componente React, vai se deparar com algo curioso: código HTML misturado diretamente dentro do arquivo JavaScript.
+
+```jsx
+// Exemplo de um componente React básico
+function Saudacao() {
+  return (
+    <div>
+      <h1>Olá, Gabriel!</h1>
+      <p>Seja bem-vindo ao módulo de React.</p>
+    </div>
+  );
+}
+```
+
+Essa sintaxe chama-se JSX (JavaScript XML).
+
+- Ela permite escrever marcações visuais diretamente no código JavaScript de forma fluida e intuitiva.
+- Por baixo dos panos, o compilador (como o Vite ou o Babel) transforma esse JSX em chamadas puras de funções JavaScript antes de o navegador exibi-lo na tela.
+
+## Props (Propriedades)
+
+No Capítulo 1, aprendemos que o React divide a interface em pequenos blocos independentes chamados Componentes. No entanto, se um componente fosse totalmente estático (exibindo sempre o mesmo texto e as mesmas imagens), ele não teria utilidade real em uma aplicação dinâmica.
+
+É aqui que entram as Props (abreviação de Properties ou Propriedades). Elas são o mecanismo fundamental para passar dados de um componente pai para um componente filho.
+
+### O que são as Props?
+
+Pense nas props de um componente exatamente como os parâmetros de uma função em JavaScript ou os argumentos de uma tag HTML (`<img src="foto.jpg" alt="Perfil" />`).
+
+- Enquanto o HTML padrão possui atributos fixos (`src`, `href`, `className`), os componentes React permitem que você crie seus próprios atributos personalizados.
+- As props são imutáveis do ponto de vista do componente que as recebe (ou seja, o componente filho pode ler e exibir os dados, mas nunca modificá-los diretamente; quem controla o dado é sempre o componente pai).
+
+### Passando e Recebendo Props na Prática
+
+Imagine que estamos desenvolvendo um sistema de portfólio ou um painel de usuários e queremos criar um componente de "Card de Perfil" reutilizável.
+
+Em vez de criar um card rígido para cada pessoa, criamos um componente genérico e passamos as informações dinamicamente via props.
+
+#### Criando o Componente Filho (CardPerfil.jsx)
+
+O componente recebe um argumento (por convenção chamado de `props`) e utiliza as chaves `{}` para injetar esses valores no JSX:
+
+```jsx
+// CardPerfil.jsx
+function CardPerfil(props) {
+  return (
+    <div className="card">
+      <h2>{props.nome}</h2>
+      <p>Cargo: {props.cargo}</p>
+      <p>Cidade: {props.cidade}</p>
+    </div>
+  );
+}
+
+export default CardPerfil;
+```
+
+#### Renderizando e Passando os Dados no Componente Pai (App.jsx)
+
+Agora, chamamos o nosso componente várias vezes a partir de um componente pai, injetando valores diferentes em cada chamada através das props:
+
+```jsx
+// App.jsx
+import CardPerfil from './CardPerfil';
+
+function App() {
+  return (
+    <div>
+      <h1>Equipe de Desenvolvimento</h1>
+      {/* Passando props personalizadas para o componente */}
+      <CardPerfil cargo="Engenheiro de QA & Backend" cidade="Curitiba" nome="Gabriel Marques"/>
+      <CardPerfil cargo="Desenvolvedora Frontend" cidade="São Paulo" nome="Ana Souza"/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+<PropsDemo />
+
+### Desestruturação de Props (Destructuring)
+
+À medida que os componentes crescem, escrever `props.nome`, `props.cargo`, `props.cidade` repetidas vezes pode se tornar cansativo.
+
+Uma excelente prática em JavaScript moderno (e muito utilizada no ecossistema React) é a desestruturação (destructuring), onde extraímos as propriedades diretamente nos parâmetros da função do componente:
+
+```jsx
+// Usando desestruturação para deixar o código mais limpo
+function CardPerfil({ nome, cargo, cidade }) {
+  return (
+    <div className="card">
+      <h2>{nome}</h2>
+      <p>Cargo: {cargo}</p>
+      <p>Cidade: {cidade}</p>
+    </div>
+  );
+}
+
+export default CardPerfil;
+```
+
+O resultado visual é exatamente o mesmo, mas a leitura do código fica muito mais elegante e direta.

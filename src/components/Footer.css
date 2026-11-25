@@ -15,6 +15,7 @@ footer {
     display: flex;
     align-items: center;
     padding: 1rem;
+    flex-wrap: wrap;
 
     .atribuicoes {
         flex: 1;
@@ -77,12 +78,12 @@ footer {
     }
 
     .logo {
+        color: var(--text);
         height: 100%;
         box-sizing: border-box;
-        margin-left: auto;
+        margin: 0 auto;
         padding: 0.5rem;
         width: 144px;
-        border-left: 2px solid var(--border);
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types'
 import { Children, isValidElement, type ComponentProps, type CSSProperties, type ReactElement, type ReactNode } from 'react'
 import { CounterDemo } from './demos/CounterDemo'
 import { BadgeDemo } from './demos/BadgeDemo'
+import { PropsDemo } from './demos/PropsDemo'
 import { CodeBlock } from './components/CodeBlock'
 
 type ElementWithChildren = ReactElement<{ children?: ReactNode }>
@@ -36,5 +37,5 @@ function MarkdownTable({ children, style, ...props }: ComponentProps<'table'>) {
 
 // Acessível a qualquer artigo
 export const components: MDXComponents = {
-  CounterDemo, BadgeDemo, table: MarkdownTable, pre: CodeBlock,
+  CounterDemo, BadgeDemo, PropsDemo, table: MarkdownTable, pre: CodeBlock,
 }

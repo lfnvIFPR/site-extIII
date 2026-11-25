@@ -1,0 +1,127 @@
+export const meta = { title: 'Tags', order: 0, chapter: 1 }
+
+No Módulo 0, montamos o nosso ambiente de desenvolvimento, demos os primeiros passos com Git e GitHub e conhecemos as três tecnologias que sustentam a web: HTML para estruturar, CSS para estilizar e JavaScript para dar comportamento às páginas. Criamos títulos, parágrafos, links, usamos Flexbox e fizemos nossos primeiros scripts respondendo a cliques.
+
+Neste módulo, vamos subir um degrau. O objetivo aqui é transformar o conhecimento inicial em uma base sólida de desenvolvimento front-end moderno, preparando o terreno para o Módulo 2, onde conheceremos o React.
+
+Vamos aprofundar o HTML e o CSS que já vimos, dominar o posicionamento em duas dimensões com o CSS Grid e, principalmente, mergulhar no JavaScript moderno (o chamado ES6+). Todos os recursos que você aprender aqui, como arrow functions, desestruturação, `.map()`, `async/await` e módulos, serão usados o tempo todo quando chegarmos no React. Em outras palavras: este módulo é a ponte entre escrever uma página simples e construir uma aplicação de verdade.
+
+O conteúdo será apresentado de forma gradual, sempre partindo do que você já sabe. Cada conceito novo vem acompanhado de exemplos práticos para você testar no seu editor.
+	
+## Formulários e Estrutura de Dados
+
+No Módulo 0, conhecemos as tags essenciais (`<h1>`, `<p>`, `<a>`, `<div>`, `<img>`, `<button>`) e aprendemos a importância do HTML semântico (`<header>`, `<main>`, `<section>`, `<footer>`). Agora vamos focar em um tipo de conteúdo que aparece em praticamente toda aplicação: os **formulários**.
+
+Entender bem formulários em HTML agora é muito importante, porque no Módulo 2 vamos reconstruir esses mesmos formulários dentro do React (com o conceito de "inputs controlados"). Quanto mais firme estiver a base em HTML puro, mais fácil será entender o que o React faz por baixo dos panos.
+
+### A tag `<form>`
+
+Um formulário é um bloco que agrupa campos de entrada de dados. Ele é representado pela tag `<form>`:
+
+```html
+<form>
+  <!-- campos vão aqui dentro -->
+</form>
+```
+
+Tudo o que o usuário digita ou seleciona fica dentro do `<form>`. Mais adiante, o JavaScript será responsável por capturar esses dados.
+
+### A tag `<input>` e seus tipos
+
+A tag `<input>` é o campo de entrada mais usado. O que muda o comportamento dela é o atributo `type`. Veja os tipos mais comuns:
+
+```html
+<input type="text" placeholder="Digite seu nome">
+<input type="email" placeholder="Digite seu e-mail">
+<input type="password" placeholder="Digite sua senha">
+<input type="number" placeholder="Digite sua idade">
+<input type="checkbox">
+<input type="date">
+```
+
+Entendendo os atributos:
+
+- `type`: define o tipo de dado esperado. O `type="email"`, por exemplo, ajuda o navegador a validar se o texto tem o formato de um e-mail.
+- `placeholder`: mostra um texto de exemplo dentro do campo, que desaparece quando o usuário começa a digitar.
+
+### A tag `<label>`
+
+O `<label>` é um rótulo que descreve para que serve um campo. Além de deixar o formulário mais claro, ele melhora a acessibilidade: ao associar o `<label>` a um `<input>`, clicar no texto também ativa o campo.
+
+A associação é feita ligando o atributo `for` do label ao `id` do input:
+
+```html
+<form>
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" placeholder="Digite seu nome">
+
+  <label for="email">E-mail:</label>
+  <input type="email" id="email" placeholder="Digite seu e-mail">
+</form>
+```
+
+Repare que estamos reutilizando o atributo `id`, que conhecemos no Módulo 0 para identificar elementos de forma única.
+
+### `<select>` e `<textarea>`
+
+Além do input, dois outros campos aparecem com frequência:
+
+O `<textarea>` cria uma caixa de texto grande, para textos longos (como um comentário):
+
+```html
+<label for="mensagem">Mensagem:</label>
+<textarea id="mensagem" placeholder="Escreva sua mensagem"></textarea>
+```
+
+O `<select>` cria uma lista de opções (um menu suspenso). Cada opção é uma tag `<option>`:
+
+```html
+<label for="cidade">Cidade:</label>
+<select id="cidade">
+  <option value="curitiba">Curitiba</option>
+  <option value="sao-paulo">São Paulo</option>
+  <option value="londrina">Londrina</option>
+</select>
+```
+
+### O botão de envio
+
+Dentro de um formulário, usamos um botão do tipo `submit` para indicar o envio dos dados:
+
+```html
+<button type="submit">Enviar</button>
+```
+
+Por padrão, ao clicar nesse botão o navegador tenta recarregar a página. Mais adiante, no capítulo sobre eventos, veremos como impedir esse comportamento para tratar os dados com JavaScript, exatamente a mesma técnica (`preventDefault`) que será usada no React no Módulo 2.
+
+### Formulário completo de exemplo
+
+Juntando tudo o que vimos, usando as tags semânticas do Módulo 0:
+
+```html
+<main>
+  <section>
+    <h2>Cadastro de Usuário</h2>
+    <form>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" placeholder="Digite seu nome">
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" placeholder="Digite seu e-mail">
+
+      <label for="cidade">Cidade:</label>
+      <select id="cidade">
+        <option value="curitiba">Curitiba</option>
+        <option value="sao-paulo">São Paulo</option>
+      </select>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+  </section>
+</main>
+```
+
+Esse formulário ainda não "faz nada" ao ser enviado. Dar vida a ele é trabalho do JavaScript, que veremos nos próximos capítulos.
+
+---
+

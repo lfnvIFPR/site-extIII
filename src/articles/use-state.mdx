@@ -1,0 +1,116 @@
+export const meta = { title: 'useState', order: 2, chapter: 2 }
+
+## Estado - Dando Memória e Dinamismo aos Componentes
+
+Nos capítulos anteriores, aprendemos que os componentes são os blocos de construção do React (Capítulo 1) e que podemos torná-los reutilizáveis passando dados de pai para filho através das Props (Capítulo 2).
+
+No entanto, as props são fixas e controladas por quem está de fora (o componente pai). O que acontece quando o usuário interage com a tela clica em um botão, digita em um campo de formulário, ativa um tema escuro ou abre um menu e o componente precisa se lembrar dessa mudança e atualizar a interface?
+
+É exatamente aqui que entra o conceito mais importante do React: o Estado (State).
+
+### O que é o Estado?
+
+Se as props funcionam como os argumentos passados para uma função, o Estado funciona como a memória interna do componente.
+
+- **Variáveis comuns não funcionam:** Em JavaScript puro, se você alterar o valor de uma variável comum (`let contador = 0; contador++`), o valor muda na memória, mas o navegador não redesenha a tela para mostrar o novo número. O React não "vê" essa alteração acontecer.
+- **O poder do Estado:** O Estado é uma variável especial monitorada pelo React. Sempre que o valor de um estado é alterado, o React automaticamente re-renderiza o componente (atualiza a interface em tempo real) para refletir o novo dado na tela.
+
+### O Hook useState
+
+Para criar e gerenciar um estado em um componente funcional, utilizamos uma função especial fornecida pelo próprio React chamada `useState` (conhecida no ecossistema como um Hook).
+
+A sintaxe fundamental:
+
+```jsx
+import { useState } from 'react';
+
+function MeuComponente() {
+  // [valorAtual, funcaoParaAtualizarValor] = useState(valorInicial);
+  const [contador, setContador] = useState(0);
+}
+```
+
+Analisando a estrutura:
+
+- `useState(0)`: Define que o valor inicial do nosso estado `contador` será `0`.
+- O `useState` retorna um array com duas posições:
+  - **O valor atual (`contador`):** Armazena o dado no momento presente.
+  - **A função modificadora (`setContador`):** A única forma recomendada de alterar o valor do estado. Quando você a chama, o React atualiza o dado e redesenha a tela.
+
+### Exemplo Prático: Um Contador Interativo
+
+Vamos construir um componente simples que possui um número na tela e dois botões: um para incrementar e outro para decrementar.
+
+```jsx
+import { useState } from 'react';
+
+function Contador() {
+  // Inicializamos o estado 'contador' com o valor 0
+  const [contador, setContador] = useState(0);
+
+  function incrementar() {
+    // Atualizamos o estado chamando a função setContador
+    setContador(contador + 1);
+  }
+
+  function decrementar() {
+    setContador(contador - 1);
+  }
+
+  return (
+    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+      <h2>Contador Interativo</h2>
+      <p style={{ fontSize: '24px', fontWeight: 'bold' }}>
+        Valor atual: {contador}
+      </p>
+      {/* Vinculamos os eventos de clique às nossas funções */}
+      <button
+        onClick={incrementar}
+        style={{ marginRight: '10px', padding: '8px 16px' }}
+      >
+        Incrementar (+)
+      </button>
+      <button onClick={decrementar} style={{ padding: '8px 16px' }}>
+        Decrementar (-)
+      </button>
+    </div>
+  );
+}
+
+export default Contador;
+```
+
+O que acontece por trás dos panos quando o botão é clicado?
+
+1. O usuário clica em "Incrementar (+)".
+2. A função `incrementar` é executada e chama `setContador(contador + 1)`.
+3. O React percebe que o estado mudou.
+4. Ele roda o componente `Contador` novamente, atualizando a variável `{contador}` para o novo valor.
+5. O navegador exibe a nova contagem instantaneamente na tela.
+
+### O Estado é Assíncrono
+
+Uma pegadinha clássica para quem está começando: as atualizações de estado no React não acontecem de forma síncrona imediata na mesma linha de código. O React agrupa as alterações de estado para otimizar a performance (processo conhecido como batching).
+
+Portanto, se você precisar atualizar um estado baseando-se no valor anterior dele mesmo, a prática recomendada é passar uma função de callback para o modificador:
+
+```jsx
+// Maneira mais segura de atualizar estados baseados no valor anterior:
+setContador(estadoAnterior => estadoAnterior + 1);
+```
+
+## Renderização Condicional e de Listas - Controlando o Que Aparece na Tela
+
+Nos capítulos anteriores, vimos como estruturar componentes (Capítulo 1), como passar dados de pai para filho usando Props (Capítulo 2) e como dar memória e reatividade aos componentes usando o Estado com o `useState` (Capítulo 3).
+
+Agora, vamos dar o próximo passo lógico: Como controlar a exibição dos elementos na tela com base em condições lógicas e como transformar arrays de dados em listas visuais dinâmicas?
+
+### Renderização Condicional: Mostrando ou Escondendo Elementos
+
+Em uma aplicação real, precisamos exibir diferentes conteúdos dependendo da situação:
+
+- Mostrar um botão de "Sair" apenas se o usuário estiver logado.
+- Exibir um aviso de "Carregando..." enquanto os dados de uma API não chegam.
+- Mostrar uma mensagem de erro se um formulário estiver preenchido incorretamente.
+
+O React utiliza a própria lógica do JavaScript (`if`, operador ternário `?:` e o operador lógico `&&`) para decidir o que renderizar.

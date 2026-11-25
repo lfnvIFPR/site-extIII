@@ -57,7 +57,8 @@
 
     code {
         display: block;
-        padding: 0;
+        width: max-content;
+        min-width: 100%;
         background: none;
         border-radius: 0;
         font: inherit;
@@ -78,6 +79,7 @@
 
     &:hover button {
         opacity: 1;
+        background-color: var(--code-bg);
         border: 2px solid var(--border);
 
         svg {

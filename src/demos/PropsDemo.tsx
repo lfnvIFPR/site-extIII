@@ -19,14 +19,14 @@ function CardPerfil({ nome, cargo, cidade }: PropsPerfil) {
     .toUpperCase()
 
   return (
-    <div style={{display: "flex", flexDirection: "column"}}>
+    <div style={{display: "flex", flexDirection: "column"}} className='props-demo-preview'>
     <h4>Equipe de Desenvolvimento</h4>
     <article className="props-profile-card">
       <span className="props-profile-avatar" aria-hidden="true">
         {iniciais || '?'}
       </span>
       <div className="props-profile-info">
-        <h3>{nome || 'Nome do perfil'}</h3>
+        <h4>{nome || 'Nome do perfil'}</h4>
         <p>{cargo || 'Cargo'}</p>
         <span className="props-profile-city">{cidade || 'Cidade'}</span>
       </div>

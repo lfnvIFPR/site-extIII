@@ -3,7 +3,7 @@
   max-width: 38rem;
   margin-inline: auto;
 
-  h2 {
+  h4 {
     margin: 0 0 1rem;
     color: var(--text-h);
     font-size: 1.15rem;
@@ -48,7 +48,7 @@
 .props-profile-info {
   min-width: 0;
 
-  h3 {
+  h4 {
     margin: 0 0 0.25rem;
     color: var(--text-h);
     font-size: 0.95rem;

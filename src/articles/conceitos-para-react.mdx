@@ -1,5 +1,7 @@
 export const meta = { title: 'Conceitos pré-React', order: 4, chapter: 1 }
 
+# Conceitos pré-React
+
 ## Assincronismo -- Promises, async/await e Fetch
 
 Até agora, nosso código era **síncrono**: cada linha executa, termina, e só então a próxima começa. Mas algumas tarefas levam tempo e não podem travar a página enquanto esperam, por exemplo, buscar dados de um servidor pela internet. Isso envolve o **assincronismo**, um dos temas mais importantes do JavaScript moderno.
@@ -153,4 +155,3 @@ console.log(saudacao("Ana")); // Olá, Ana!
 > ```
 
 Se você reparou, os módulos extras de Node.js e Firebase usam `import` e `export` o tempo todo (como `import { app } from "./firebase"`). E no Módulo 2, cada componente React fica em seu próprio arquivo e é importado quando necessário, exatamente este mecanismo. Note que o React usa `export default` para componentes e `import` para reutilizá-los, como em `import CardPerfil from './CardPerfil'`.
-
